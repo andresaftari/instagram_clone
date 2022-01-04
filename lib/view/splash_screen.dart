@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:instagram_clone/view/pages.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -6,6 +10,23 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+      const Duration(seconds: 5),
+          () => Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, a, b) => const HomePageViews(),
+          transitionDuration: const Duration(seconds: 1),
+          transitionsBuilder: (context, anim, a, child) =>
+              FadeTransition(opacity: anim, child: child),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
