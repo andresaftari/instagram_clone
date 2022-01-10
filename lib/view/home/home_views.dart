@@ -11,11 +11,13 @@ class _HomePageViewsState extends State<HomePageViews> {
   final HomeController _homeController = Get.find();
 
   late Future<List<UserStory>> listStory;
+  late Future<List<Feeds>> listFeeds;
 
   @override
   void initState() {
-    listStory = _homeController.getUserStories();
     super.initState();
+    listStory = _homeController.getUserStories();
+    listFeeds = _homeController.getFeeds();
   }
 
   @override
@@ -34,12 +36,14 @@ class _HomePageViewsState extends State<HomePageViews> {
           _homeController.getUserStories();
         },
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          height: double.infinity,
           margin: EdgeInsets.only(top: 2),
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [
               buildListStory(),
+              buildListFeeds(),
             ],
           ),
         ),
@@ -97,6 +101,35 @@ class _HomePageViewsState extends State<HomePageViews> {
           ],
         ),
       ),
+    );
+  }
+
+  Container buildListFeeds() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      width: MediaQuery.of(context).size.width,
+      child: FutureBuilder<List<Feeds>>(
+          future: listFeeds,
+          builder: (context, snapshot) {
+            var feeds = snapshot.data;
+
+            return Container(
+              padding: EdgeInsets.only(top: 4, right: 4),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 200,
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: feeds?.length,
+                  itemBuilder: (context, i) {
+                    return FeedsCard(
+                      username: feeds?[i].username,
+                      avatarUrl: feeds?[i].avatarURL,
+                      imageUrl: feeds?[i].imageURL,
+                      likeCount: feeds?[i].likeCount,
+                    );
+                  }),
+            );
+          }),
     );
   }
 }

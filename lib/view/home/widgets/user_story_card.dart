@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:instagram_clone/themes/theme_color.dart';
 
 class UserStoryCard extends StatelessWidget {
@@ -83,20 +81,20 @@ class CurrentStoryCard extends StatelessWidget {
               child: Align(
                 alignment: AlignmentDirectional(1, 1),
                 child: Container(
-                  width: 28,
-                  height: 28,
+                  width: 22,
+                  height: 22,
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: Colors.black,
-                      width: 2,
+                      width: 1,
                     ),
                   ),
                   child: Icon(
                     Icons.add,
                     color: Color(0xFFFBFBFB),
-                    size: 24,
+                    size: 20,
                   ),
                 ),
               ),
