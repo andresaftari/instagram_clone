@@ -5,7 +5,7 @@ import 'package:instagram_clone/controller/binding/controller_binding.dart';
 import 'package:instagram_clone/controller/home_controller.dart';
 import 'package:instagram_clone/view/splash_screen.dart';
 
-void main() {
+void main() async {
   Get.put(HomeController(), permanent: true);
   Get.put(AuthController(), permanent: true);
 

@@ -4,8 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:instagram_clone/themes/theme_color.dart';
 
 class HomeAppbar extends StatefulWidget implements PreferredSizeWidget {
-  const HomeAppbar({Key? key}) : super(key: key);
-
   @override
   _HomeAppbarState createState() => _HomeAppbarState();
 

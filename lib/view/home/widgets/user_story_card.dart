@@ -68,7 +68,7 @@ class CurrentStoryCard extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Color.fromRGBO(248, 7, 89, 1),
+                  color: Color.fromRGBO(61, 235, 52, 1),
                   width: 1.8,
                 ),
                 image: DecorationImage(
@@ -80,6 +80,26 @@ class CurrentStoryCard extends StatelessWidget {
               ),
               width: 62,
               height: 62,
+              child: Align(
+                alignment: AlignmentDirectional(1, 1),
+                child: Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 2,
+                    ),
+                  ),
+                  child: Icon(
+                    Icons.add,
+                    color: Color(0xFFFBFBFB),
+                    size: 24,
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 4),
             Text(
