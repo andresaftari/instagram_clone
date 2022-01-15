@@ -121,11 +121,14 @@ class _HomePageViewsState extends State<HomePageViews> {
                   scrollDirection: Axis.vertical,
                   itemCount: feeds?.length,
                   itemBuilder: (context, i) {
+                    print(i);
+
                     return FeedsCard(
+                      id: feeds?[i].id,
                       username: feeds?[i].username,
                       avatarUrl: feeds?[i].avatarURL,
                       imageUrl: feeds?[i].imageURL,
-                      likeCount: feeds?[i].likeCount,
+                      likes: feeds?[i].likeCount,
                     );
                   }),
             );

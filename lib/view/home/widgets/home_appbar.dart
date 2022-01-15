@@ -18,7 +18,7 @@ class _HomeAppbarState extends State<HomeAppbar> {
       elevation: 0.15,
       backgroundColor: bgDarkMode,
       shadowColor: bgLightMode,
-      title: Text('Instagram'),
+      title: Text('Instaclone'),
       titleTextStyle: GoogleFonts.grandHotel(
         fontWeight: FontWeight.w500,
         color: Colors.white,

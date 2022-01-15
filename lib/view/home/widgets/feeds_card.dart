@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram_clone/controller/home_controller.dart';
 
 class FeedsCard extends StatefulWidget {
-  final String? username, imageUrl, avatarUrl, likeCount;
+  final String? username, imageUrl, avatarUrl, likes;
+  final int? id;
 
   FeedsCard({
+    required this.id,
     required this.username,
     required this.avatarUrl,
     required this.imageUrl,
-    required this.likeCount,
+    required this.likes,
   });
 
   @override
@@ -16,6 +19,8 @@ class FeedsCard extends StatefulWidget {
 }
 
 class _FeedsCardState extends State<FeedsCard> {
+  final HomeController _homeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,8 +53,13 @@ class _FeedsCardState extends State<FeedsCard> {
               width: 48,
               height: 48,
               decoration: BoxDecoration(shape: BoxShape.circle),
-              child: Image.asset(
-                widget.avatarUrl ?? 'assets/images/noavatar.png',
+              child: GestureDetector(
+                onTap: () {
+                  Get.snackbar('Test', 'Tapped id: ${widget.id}');
+                },
+                child: Image.asset(
+                  widget.avatarUrl ?? 'assets/images/noavatar.png',
+                ),
               ),
               clipBehavior: Clip.antiAlias,
             ),
@@ -78,16 +88,14 @@ class _FeedsCardState extends State<FeedsCard> {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            buildStartFooterMenu(),
-          ],
+          children: [buildStartFooterMenu(widget.id)],
         ),
         Padding(
-          padding: EdgeInsets.only(left: 16, top: 8, bottom: 8),
+          padding: EdgeInsets.only(left: 8, top: 8, bottom: 8),
           child: Row(
             children: [
               Text(
-                widget.likeCount.toString(),
+                widget.likes.toString(),
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
@@ -107,17 +115,20 @@ class _FeedsCardState extends State<FeedsCard> {
     );
   }
 
-  Row buildStartFooterMenu() {
+  Row buildStartFooterMenu(var id) {
     return Row(
       children: [
         Padding(
           padding: EdgeInsets.only(right: 8, top: 8),
-          child: GestureDetector(
-            onTap: () {
-
-            },
-            child: Icon(
-              Icons.favorite_outline,
+          child: Obx(
+            () => GestureDetector(
+              onTap: () {
+                print('tapped ${widget.id}');
+                _homeController.setFeedsLike(widget.id);
+              },
+              child: _homeController.isFeedLiked.value
+                  ? Icon(Icons.favorite, size: 30, color: Colors.redAccent)
+                  : Icon(Icons.favorite_outline, size: 30),
             ),
           ),
         )
