@@ -27,26 +27,33 @@ class _HomePageViewsState extends State<HomePageViews> {
       extendBodyBehindAppBar: true,
       backgroundColor: bgDarkMode,
       appBar: HomeAppbar(),
-      body: RefreshIndicator(
-        displacement: 0.1,
-        color: Colors.transparent,
-        backgroundColor: Colors.transparent,
-        strokeWidth: 0.1,
-        onRefresh: () async {
-          _homeController.getUserStories();
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: double.infinity,
-          margin: EdgeInsets.only(top: 2),
-          child: ListView(
-            scrollDirection: Axis.vertical,
-            children: [
-              buildListStory(),
-              buildListFeeds(),
-            ],
-          ),
-        ),
+      body: Obx(
+        () => _homeController.feedsObsList.isEmpty
+            ? Center(
+                child: CircularProgressIndicator(
+                    backgroundColor: Colors.blueAccent))
+            : RefreshIndicator(
+                displacement: 0.1,
+                color: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                strokeWidth: 0.1,
+                onRefresh: () async {
+                  _homeController.getUserStories();
+                  _homeController.getFeeds();
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: double.infinity,
+                  margin: EdgeInsets.only(top: 2),
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      buildListStory(),
+                      buildListFeeds(),
+                    ],
+                  ),
+                ),
+              ),
       ),
     );
   }

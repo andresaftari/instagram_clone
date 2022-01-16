@@ -1,6 +1,10 @@
+import 'dart:math' as math;
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/controller/home_controller.dart';
+import 'package:intl/intl.dart';
 
 class FeedsCard extends StatefulWidget {
   final String? username, imageUrl, avatarUrl, likes;
@@ -23,20 +27,21 @@ class _FeedsCardState extends State<FeedsCard> {
 
   @override
   Widget build(BuildContext context) {
+    var count = 0;
+
+    if (widget.likes != null) {
+      count = int.parse(widget.likes.toString());
+    }
+
+    var like = NumberFormat.decimalPattern().format(count);
+
     return Column(
       children: [
         buildFeedsHeader(),
         widget.imageUrl != null
-            ? Image.network(
-                widget.imageUrl ?? '',
-                fit: BoxFit.contain,
-                // width: MediaQuery.of(context).size.width,
-              )
-            : Image.asset(
-                'assets/images/noavatar.png',
-                // width: MediaQuery.of(context).size.width,
-              ),
-        buildFeedsFooter(),
+            ? Image.network(widget.imageUrl ?? '', fit: BoxFit.contain)
+            : Image.asset('assets/images/noavatar.png'),
+        buildFeedsFooter(like),
       ],
     );
   }
@@ -54,9 +59,7 @@ class _FeedsCardState extends State<FeedsCard> {
               height: 48,
               decoration: BoxDecoration(shape: BoxShape.circle),
               child: GestureDetector(
-                onTap: () {
-                  Get.snackbar('Test', 'Tapped id: ${widget.id}');
-                },
+                onTap: () => Get.snackbar('Test', 'Tapped id: ${widget.id}'),
                 child: Image.asset(
                   widget.avatarUrl ?? 'assets/images/noavatar.png',
                 ),
@@ -83,19 +86,21 @@ class _FeedsCardState extends State<FeedsCard> {
     );
   }
 
-  Column buildFeedsFooter() {
+  Column buildFeedsFooter(String likeCount) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [buildStartFooterMenu(widget.id)],
+          children: [
+            buildStartFooterMenu(widget.id),
+          ],
         ),
         Padding(
           padding: EdgeInsets.only(left: 8, top: 8, bottom: 8),
           child: Row(
             children: [
               Text(
-                widget.likes.toString(),
+                likeCount.toString(),
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
@@ -119,19 +124,45 @@ class _FeedsCardState extends State<FeedsCard> {
     return Row(
       children: [
         Padding(
-          padding: EdgeInsets.only(right: 8, top: 8),
-          child: Obx(
-            () => GestureDetector(
-              onTap: () {
-                print('tapped ${widget.id}');
-                _homeController.setFeedsLike(widget.id);
-              },
-              child: _homeController.isFeedLiked.value
-                  ? Icon(Icons.favorite, size: 30, color: Colors.redAccent)
-                  : Icon(Icons.favorite_outline, size: 30),
+          padding: EdgeInsets.only(right: 16, top: 8),
+          child: GestureDetector(
+            onTap: () async {
+              print('tapped ${widget.id}');
+              _homeController.toggleLikedFeed(widget.id);
+
+              Get.snackbar(
+                'Feeds',
+                'Masih dalam pengembangan',
+              );
+            },
+            child: _homeController.isFeedLiked.value
+                ? Icon(Icons.favorite, size: 30, color: Colors.redAccent)
+                : Icon(Icons.favorite_outline, size: 30),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 8, right: 8),
+          child: GestureDetector(
+            onTap: () => Get.snackbar(
+              'Feeds',
+              'Masih dalam pengembangan',
+            ),
+            child: Transform(
+              transform: Matrix4.rotationY(math.pi),
+              alignment: Alignment.center,
+              child: Icon(CupertinoIcons.conversation_bubble, size: 26),
             ),
           ),
-        )
+        ),
+        // Padding(
+        //   padding: EdgeInsets.only(top: 8),
+        //   child: GestureDetector(
+        //     onTap: () => Get.snackbar(
+        //       'Feeds',
+        //       'Masih dalam pengembangan',
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

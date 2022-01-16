@@ -12,4 +12,9 @@ class Feeds {
     required this.isLiked,
     required this.comments,
   });
+
+  @override
+  String toString() {
+    return 'Feeds{username: $username, id: $id, isLiked: $isLiked}\n';
+  }
 }

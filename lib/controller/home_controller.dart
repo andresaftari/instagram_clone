@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:instagram_clone/models/feeds.dart';
 import 'package:instagram_clone/models/story.dart';
+import 'package:intl/intl.dart';
 
 class HomeController extends GetxController {
   var storyObsList = List<UserStory>.empty(growable: true).obs;
@@ -66,7 +67,7 @@ class HomeController extends GetxController {
         avatarURL: 'assets/images/bmw.png',
         imageURL:
             'https://www.bmw.co.id/content/dam/bmw/common/all-models/3-series/series-overview/bmw-3er-overview-page-ms-06.jpg/jcr:content/renditions/cq5dam.resized.img.890.medium.time1627455295591.jpg',
-        likeCount: '510,688',
+        likeCount: '510688',
         isLiked: isFeedLiked.value,
         comments:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -78,7 +79,7 @@ class HomeController extends GetxController {
         avatarURL: 'assets/images/bmw.png',
         imageURL:
             'https://www.bmw.co.id/content/dam/bmw/common/all-models/3-series/series-overview/bmw-3er-overview-page-cp-xxl.jpg/jcr:content/renditions/cq5dam.resized.img.980.medium.time1627455297346.jpg',
-        likeCount: '3,560,501',
+        likeCount: '3560501',
         isLiked: isFeedLiked.value,
         comments:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -90,7 +91,7 @@ class HomeController extends GetxController {
         avatarURL: 'assets/images/icon_google.png',
         imageURL:
             'https://lh5.googleusercontent.com/p/AF1QipOWRpuyAmHjW2PKfu9H7ZhMIH08iY35SCddf4-0=w408-h306-k-no',
-        likeCount: '104,555',
+        likeCount: '104555',
         isLiked: isFeedLiked.value,
         comments:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -109,30 +110,21 @@ class HomeController extends GetxController {
     return listFeeds;
   }
 
-  Future<List<Feeds>> setFeedsLike(var id) async {
+  Future<Feeds> setFeedsLike(var id) async {
     List<Feeds> listFeeds = [];
+    var feeds;
 
     try {
-      getFeeds().then((value) {
+      await getFeeds().then((value) {
         listFeeds.addAll(value);
+        feeds = listFeeds[id - 1];
 
-        var count = int.parse(listFeeds[id - 1].likeCount) + 1;
-
-        listFeeds[id - 1] = Feeds(
-          id: listFeeds[id - 1].id,
-          username: listFeeds[id - 1].username,
-          avatarURL: listFeeds[id - 1].avatarURL,
-          imageURL: listFeeds[id - 1].imageURL,
-          likeCount: count.toString(),
-          isLiked: !listFeeds[id - 1].isLiked,
-          comments: listFeeds[id - 1].comments,
-        );
-        print(listFeeds[id - 1].isLiked);
+        feeds.isLiked = !listFeeds[id - 1].isLiked;
       });
     } catch (e) {
       print(e.toString());
     }
 
-    return listFeeds;
+    return feeds;
   }
 }
