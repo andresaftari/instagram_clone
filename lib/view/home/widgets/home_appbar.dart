@@ -36,8 +36,9 @@ class _HomeAppbarState extends State<HomeAppbar> {
   ElevatedButton actionMessenger() {
     return ElevatedButton(
       onPressed: () => Get.snackbar(
-        'Messenger',
+        'DM',
         'Masih dalam pengembangan',
+        duration: Duration(seconds: 2),
       ),
       child: Image(
         image: AssetImage(
@@ -59,6 +60,7 @@ class _HomeAppbarState extends State<HomeAppbar> {
       onPressed: () => Get.snackbar(
         'Activity',
         'Masih dalam pengembangan',
+        duration: Duration(seconds: 2),
       ),
       icon: Icon(
         Icons.favorite_border_sharp,
@@ -73,6 +75,7 @@ class _HomeAppbarState extends State<HomeAppbar> {
       onPressed: () => Get.snackbar(
         'Add Post',
         'Masih dalam pengembangan',
+        duration: Duration(seconds: 2),
       ),
       icon: Icon(
         Icons.add_box_outlined,

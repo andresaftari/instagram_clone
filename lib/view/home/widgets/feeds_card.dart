@@ -7,7 +7,7 @@ import 'package:instagram_clone/controller/home_controller.dart';
 import 'package:intl/intl.dart';
 
 class FeedsCard extends StatefulWidget {
-  final String? username, imageUrl, avatarUrl, likes;
+  final String? username, imageUrl, avatarUrl, likes, comments;
   final int? id;
 
   FeedsCard({
@@ -16,6 +16,7 @@ class FeedsCard extends StatefulWidget {
     required this.avatarUrl,
     required this.imageUrl,
     required this.likes,
+    required this.comments,
   });
 
   @override
@@ -42,6 +43,7 @@ class _FeedsCardState extends State<FeedsCard> {
             ? Image.network(widget.imageUrl ?? '', fit: BoxFit.contain)
             : Image.asset('assets/images/noavatar.png'),
         buildFeedsFooter(like),
+        buildFeedsComments(),
       ],
     );
   }
@@ -125,27 +127,32 @@ class _FeedsCardState extends State<FeedsCard> {
       children: [
         Padding(
           padding: EdgeInsets.only(right: 16, top: 8),
-          child: GestureDetector(
-            onTap: () async {
-              print('tapped ${widget.id}');
-              _homeController.toggleLikedFeed(widget.id);
+          child: Obx(
+            () => GestureDetector(
+              onTap: () {
+                print('tapped ${widget.id}');
+                _homeController.toggleLikedFeed(widget.id);
+                // _homeController.setFeedsLike(widget.id);
 
-              Get.snackbar(
-                'Feeds',
-                'Masih dalam pengembangan',
-              );
-            },
-            child: _homeController.isFeedLiked.value
-                ? Icon(Icons.favorite, size: 30, color: Colors.redAccent)
-                : Icon(Icons.favorite_outline, size: 30),
+                Get.snackbar(
+                  'Likes',
+                  'Masih dalam pengembangan',
+                  duration: Duration(seconds: 1),
+                );
+              },
+              child: _homeController.isFeedLiked.value
+                  ? Icon(Icons.favorite, size: 30, color: Colors.redAccent)
+                  : Icon(Icons.favorite_outline, size: 30),
+            ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 8, right: 8),
+          padding: EdgeInsets.only(top: 8, right: 16),
           child: GestureDetector(
             onTap: () => Get.snackbar(
-              'Feeds',
+              'Comments',
               'Masih dalam pengembangan',
+              duration: Duration(seconds: 2),
             ),
             child: Transform(
               transform: Matrix4.rotationY(math.pi),
@@ -154,15 +161,54 @@ class _FeedsCardState extends State<FeedsCard> {
             ),
           ),
         ),
-        // Padding(
-        //   padding: EdgeInsets.only(top: 8),
-        //   child: GestureDetector(
-        //     onTap: () => Get.snackbar(
-        //       'Feeds',
-        //       'Masih dalam pengembangan',
-        //     ),
-        //   ),
-        // ),
+        Padding(
+          padding: EdgeInsets.only(top: 8),
+          child: GestureDetector(
+            onTap: () => Get.snackbar(
+              'Send to dm',
+              'Masih dalam pengembangan',
+              duration: Duration(seconds: 2),
+            ),
+            child: Image.asset(
+              'assets/images/ic_send.png',
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Column buildFeedsComments() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: RichText(
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.start,
+            text: TextSpan(
+              text: '${widget.username} ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
+              children: [
+                TextSpan(
+                  text: '${widget.comments} ',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ]
+            ),
+          ),
+        )
       ],
     );
   }

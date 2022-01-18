@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:instagram_clone/models/feeds.dart';
 import 'package:instagram_clone/models/story.dart';
-import 'package:intl/intl.dart';
 
 class HomeController extends GetxController {
   var storyObsList = List<UserStory>.empty(growable: true).obs;
@@ -32,11 +31,16 @@ class HomeController extends GetxController {
         username: 'google',
         avatarURL: 'assets/images/icon_google.png',
       );
+      var _dummy5 = UserStory(
+        username: 'google',
+        avatarURL: 'assets/images/telkom_logo.png',
+      );
 
       listStory.add(_dummy1);
       listStory.add(_dummy2);
       listStory.add(_dummy3);
       listStory.add(_dummy4);
+      listStory.add(_dummy5);
 
       storyObsList.addAll(listStory);
     } catch (e) {
@@ -110,21 +114,21 @@ class HomeController extends GetxController {
     return listFeeds;
   }
 
-  Future<Feeds> setFeedsLike(var id) async {
-    List<Feeds> listFeeds = [];
-    var feeds;
-
-    try {
-      await getFeeds().then((value) {
-        listFeeds.addAll(value);
-        feeds = listFeeds[id - 1];
-
-        feeds.isLiked = !listFeeds[id - 1].isLiked;
-      });
-    } catch (e) {
-      print(e.toString());
-    }
-
-    return feeds;
-  }
+  // Future<Feeds> setFeedsLike(var id) async {
+  //   List<Feeds> listFeeds = [];
+  //   var feeds;
+  //
+  //   try {
+  //     await getFeeds().then((value) {
+  //       listFeeds.addAll(value);
+  //       feeds = listFeeds[id - 1];
+  //
+  //       feeds.isLiked = !listFeeds[id - 1].isLiked;
+  //     });
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  //
+  //   return feeds;
+  // }
 }

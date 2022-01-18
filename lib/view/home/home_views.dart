@@ -31,7 +31,9 @@ class _HomePageViewsState extends State<HomePageViews> {
         () => _homeController.feedsObsList.isEmpty
             ? Center(
                 child: CircularProgressIndicator(
-                    backgroundColor: Colors.blueAccent))
+                  backgroundColor: Colors.blueAccent,
+                ),
+              )
             : RefreshIndicator(
                 displacement: 0.1,
                 color: Colors.transparent,
@@ -70,6 +72,7 @@ class _HomePageViewsState extends State<HomePageViews> {
               onTap: () => Get.snackbar(
                 'Story',
                 'Masih dalam pengembangan',
+                duration: Duration(seconds: 1),
               ),
               child: Container(
                 padding: EdgeInsets.only(top: 4),
@@ -96,6 +99,7 @@ class _HomePageViewsState extends State<HomePageViews> {
                             onTap: () => Get.snackbar(
                               'Story',
                               'Masih dalam pengembangan',
+                              duration: Duration(seconds: 1),
                             ),
                             child: UserStoryCard(
                               username: story?[i].username,
@@ -136,6 +140,7 @@ class _HomePageViewsState extends State<HomePageViews> {
                       avatarUrl: feeds?[i].avatarURL,
                       imageUrl: feeds?[i].imageURL,
                       likes: feeds?[i].likeCount,
+                      comments: feeds?[i].comments,
                     );
                   }),
             );
