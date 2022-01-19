@@ -94,7 +94,7 @@ class _FeedsCardState extends State<FeedsCard> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            buildStartFooterMenu(widget.id),
+            buildStartFooterMenu(),
           ],
         ),
         Padding(
@@ -122,7 +122,7 @@ class _FeedsCardState extends State<FeedsCard> {
     );
   }
 
-  Row buildStartFooterMenu(var id) {
+  Row buildStartFooterMenu() {
     return Row(
       children: [
         Padding(
