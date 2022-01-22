@@ -66,51 +66,6 @@ class _HomePageViewsState extends State<HomePageViews> {
       width: double.infinity,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        // child: Row(
-        //   children: [
-        //     // GestureDetector(
-        //     //   onTap: () => Get.snackbar(
-        //     //     'Story',
-        //     //     'Masih dalam pengembangan',
-        //     //     duration: Duration(seconds: 1),
-        //     //   ),
-        //     //   child: Container(
-        //     //     padding: EdgeInsets.only(top: 4),
-        //     //     child: CurrentStoryCard(
-        //     //       username: 'Your Story',
-        //     //       avatarURL: 'assets/images/andre.png',
-        //     //     ),
-        //     //   ),
-        //     // ),
-        //     FutureBuilder<List<UserStory>>(
-        //         future: listStory,
-        //         builder: (context, snapshot) {
-        //           var story = snapshot.data;
-        //
-        //           return Container(
-        //             padding: EdgeInsets.only(top: 4, right: 4),
-        //             width: MediaQuery.of(context).size.width,
-        //             height: 85,
-        //             child: ListView.builder(
-        //                 scrollDirection: Axis.horizontal,
-        //                 itemCount: story?.length,
-        //                 itemBuilder: (context, i) {
-        //                   return GestureDetector(
-        //                     onTap: () => Get.snackbar(
-        //                       'Story',
-        //                       'Masih dalam pengembangan',
-        //                       duration: Duration(seconds: 1),
-        //                     ),
-        //                     child: UserStoryCard(
-        //                       username: story?[i].username,
-        //                       avatarURL: story?[i].avatarURL,
-        //                     ),
-        //                   );
-        //                 }),
-        //           );
-        //         }),
-        //   ],
-        // ),
         child: FutureBuilder<List<UserStory>>(
             future: listStory,
             builder: (context, snapshot) {
@@ -126,11 +81,7 @@ class _HomePageViewsState extends State<HomePageViews> {
                     itemBuilder: (context, i) {
                       if (i > 0) {
                         return GestureDetector(
-                          onTap: () => Get.snackbar(
-                            'Story',
-                            'Masih dalam pengembangan',
-                            duration: Duration(seconds: 1),
-                          ),
+                          onTap: () => SnackbarUtils.showStoryInDevelopment(),
                           child: UserStoryCard(
                             username: story?[i].username,
                             avatarURL: story?[i].avatarURL,

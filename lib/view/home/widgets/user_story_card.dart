@@ -35,10 +35,7 @@ class UserStoryCard extends StatelessWidget {
         ),
         Text(
           username.toString(),
-          style: TextStyle(
-            fontSize: 11,
-            color: bgLightMode,
-          ),
+          style: TextStyle(fontSize: 11, color: bgLightMode),
         ),
       ],
     );
@@ -102,10 +99,7 @@ class CurrentStoryCard extends StatelessWidget {
             SizedBox(height: 4),
             Text(
               username.toString(),
-              style: TextStyle(
-                fontSize: 11,
-                color: bgLightMode,
-              ),
+              style: TextStyle(fontSize: 11, color: bgLightMode),
             ),
           ],
         ),

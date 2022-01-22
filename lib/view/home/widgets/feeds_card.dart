@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/controller/home_controller.dart';
+import 'package:instagram_clone/utils/snackbar_util.dart';
 import 'package:intl/intl.dart';
 
 class FeedsCard extends StatefulWidget {
@@ -61,7 +62,11 @@ class _FeedsCardState extends State<FeedsCard> {
               height: 48,
               decoration: BoxDecoration(shape: BoxShape.circle),
               child: GestureDetector(
-                onTap: () => Get.snackbar('Test', 'Tapped id: ${widget.id}'),
+                onTap: () => SnackbarUtils.showDebug(
+                  widget.id,
+                  'Tapped feed id: ',
+                  'Tapped Feed',
+                ),
                 child: Image.asset(
                   widget.avatarUrl ?? 'assets/images/noavatar.png',
                 ),
@@ -81,11 +86,12 @@ class _FeedsCardState extends State<FeedsCard> {
         Padding(
           padding: EdgeInsets.only(right: 4),
           child: GestureDetector(
-            onTap: () => Get.snackbar(
-              'Feeds',
-              'Masih dalam pengembangan',
+            onTap: () => SnackbarUtils.showStoryInDevelopment(),
+            child: Icon(
+              Icons.more_vert,
+              color: Colors.white,
+              size: 24,
             ),
-            child: Icon(Icons.more_vert, color: Colors.white, size: 24),
           ),
         ),
       ],
@@ -97,9 +103,7 @@ class _FeedsCardState extends State<FeedsCard> {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            buildStartFooterMenu(),
-          ],
+          children: [buildStartFooterMenu()],
         ),
         Padding(
           padding: EdgeInsets.only(left: 8, top: 8, bottom: 8),
@@ -138,11 +142,7 @@ class _FeedsCardState extends State<FeedsCard> {
                 _homeController.toggleLikedFeed(widget.id);
                 // _homeController.setFeedsLike(widget.id);
 
-                Get.snackbar(
-                  'Likes',
-                  'Masih dalam pengembangan',
-                  duration: Duration(seconds: 1),
-                );
+                SnackbarUtils.showLikeInDevelopment();
               },
               child: _homeController.isFeedLiked.value
                   ? Icon(Icons.favorite, size: 30, color: Colors.redAccent)
@@ -153,11 +153,7 @@ class _FeedsCardState extends State<FeedsCard> {
         Padding(
           padding: EdgeInsets.only(top: 8, right: 16),
           child: GestureDetector(
-            onTap: () => Get.snackbar(
-              'Comments',
-              'Masih dalam pengembangan',
-              duration: Duration(seconds: 2),
-            ),
+            onTap: () => SnackbarUtils.showCommentInDevelopment(),
             child: Transform(
               transform: Matrix4.rotationY(math.pi),
               alignment: Alignment.center,
@@ -172,11 +168,7 @@ class _FeedsCardState extends State<FeedsCard> {
         Padding(
           padding: EdgeInsets.only(top: 8),
           child: GestureDetector(
-            onTap: () => Get.snackbar(
-              'Send to dm',
-              'Masih dalam pengembangan',
-              duration: Duration(seconds: 2),
-            ),
+            onTap: () => SnackbarUtils.showSendToDM(),
             child: Image.asset(
               'assets/images/ic_send.png',
               color: Colors.white,
