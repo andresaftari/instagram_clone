@@ -15,6 +15,10 @@ class HomeController extends GetxController {
     List<UserStory> listStory = [];
 
     try {
+      var init = UserStory(
+        username: '',
+        avatarURL: '',
+      );
       var _dummy1 = UserStory(
         username: 'chevalierlab',
         avatarURL: 'assets/images/chevalier.png',
@@ -32,10 +36,11 @@ class HomeController extends GetxController {
         avatarURL: 'assets/images/icon_google.png',
       );
       var _dummy5 = UserStory(
-        username: 'google',
+        username: 'Telkom University',
         avatarURL: 'assets/images/telkom_logo.png',
       );
 
+      listStory.add(init);
       listStory.add(_dummy1);
       listStory.add(_dummy2);
       listStory.add(_dummy3);
@@ -114,21 +119,21 @@ class HomeController extends GetxController {
     return listFeeds;
   }
 
-  // Future<Feeds> setFeedsLike(var id) async {
-  //   List<Feeds> listFeeds = [];
-  //   var feeds;
-  //
-  //   try {
-  //     await getFeeds().then((value) {
-  //       listFeeds.addAll(value);
-  //       feeds = listFeeds[id - 1];
-  //
-  //       feeds.isLiked = !listFeeds[id - 1].isLiked;
-  //     });
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  //
-  //   return feeds;
-  // }
+// Future<Feeds> setFeedsLike(var id) async {
+//   List<Feeds> listFeeds = [];
+//   var feeds;
+//
+//   try {
+//     await getFeeds().then((value) {
+//       listFeeds.addAll(value);
+//       feeds = listFeeds[id - 1];
+//
+//       feeds.isLiked = !listFeeds[id - 1].isLiked;
+//     });
+//   } catch (e) {
+//     print(e.toString());
+//   }
+//
+//   return feeds;
+// }
 }

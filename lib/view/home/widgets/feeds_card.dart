@@ -70,7 +70,11 @@ class _FeedsCardState extends State<FeedsCard> {
             ),
             Text(
               widget.username ?? 'Instagram User',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -142,7 +146,7 @@ class _FeedsCardState extends State<FeedsCard> {
               },
               child: _homeController.isFeedLiked.value
                   ? Icon(Icons.favorite, size: 30, color: Colors.redAccent)
-                  : Icon(Icons.favorite_outline, size: 30),
+                  : Icon(Icons.favorite_outline, size: 30, color: Colors.white),
             ),
           ),
         ),
@@ -157,7 +161,11 @@ class _FeedsCardState extends State<FeedsCard> {
             child: Transform(
               transform: Matrix4.rotationY(math.pi),
               alignment: Alignment.center,
-              child: Icon(CupertinoIcons.conversation_bubble, size: 26),
+              child: Icon(
+                CupertinoIcons.conversation_bubble,
+                size: 26,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
@@ -190,23 +198,22 @@ class _FeedsCardState extends State<FeedsCard> {
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.start,
             text: TextSpan(
-              text: '${widget.username} ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-              ),
-              children: [
-                TextSpan(
-                  text: '${widget.comments} ',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
+                text: '${widget.username} ',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
                 ),
-              ]
-            ),
+                children: [
+                  TextSpan(
+                    text: '${widget.comments} ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ]),
           ),
         )
       ],
