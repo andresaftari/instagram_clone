@@ -40,7 +40,7 @@ class SnackbarUtils {
   static void showDebug(output, message, tag) => Get.snackbar(
         tag,
         '$message: $output',
-        duration: Duration(seconds: 2),
+        duration: Duration(seconds: 1),
         colorText: Colors.white,
       );
 }
