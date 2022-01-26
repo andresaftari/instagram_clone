@@ -13,6 +13,8 @@ class _HomePageViewsState extends State<HomePageViews> {
   late Future<List<UserStory>> listStory;
   late Future<List<Feeds>> listFeeds;
 
+  String? avatar = '';
+
   @override
   void initState() {
     super.initState();
@@ -43,19 +45,64 @@ class _HomePageViewsState extends State<HomePageViews> {
                   _homeController.getUserStories();
                   _homeController.getFeeds();
                 },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: double.infinity,
-                  margin: EdgeInsets.only(top: 2),
-                  child: ListView(
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      buildListStory(),
-                      buildListFeeds(),
-                    ],
+                child: SafeArea(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: double.infinity,
+                    margin: EdgeInsets.only(top: 2),
+                    child: ListView(
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        buildListStory(),
+                        buildListFeeds(),
+                      ],
+                    ),
                   ),
                 ),
               ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: bgDarkMode,
+        elevation: 0,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_filled, color: Colors.white.withOpacity(0.8)),
+            activeIcon: Icon(Icons.home_filled, color: Colors.white),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search, color: Colors.white.withOpacity(0.8)),
+            activeIcon: Icon(Icons.search, color: Colors.white),
+            label: 'Discovery',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.play_rectangle,
+                color: Colors.white.withOpacity(0.8)),
+            activeIcon:
+                Icon(CupertinoIcons.play_rectangle_fill, color: Colors.white),
+            label: 'Reels',
+          ),
+          BottomNavigationBarItem(
+            icon:
+                Icon(CupertinoIcons.bag, color: Colors.white.withOpacity(0.8)),
+            activeIcon: Icon(CupertinoIcons.bag_fill, color: Colors.white),
+            label: 'Shopping',
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/andre.png'),
+                ),
+              ),
+            ),
+            label: 'Shopping',
+          ),
+        ],
       ),
     );
   }
@@ -88,9 +135,12 @@ class _HomePageViewsState extends State<HomePageViews> {
                           ),
                         );
                       } else {
-                        return CurrentStoryCard(
-                          username: 'Your Story',
-                          avatarURL: 'assets/images/andre.png',
+                        return GestureDetector(
+                          onTap: () => SnackbarUtils.showStoryInDevelopment(),
+                          child: CurrentStoryCard(
+                            username: 'Your Story',
+                            avatarURL: 'assets/images/andre.png',
+                          ),
                         );
                       }
                     }),
@@ -118,6 +168,9 @@ class _HomePageViewsState extends State<HomePageViews> {
                   itemCount: feeds?.length,
                   itemBuilder: (context, i) {
                     print(i);
+
+                    avatar =
+                        feeds?[0].avatarURL ?? 'assets/images/noavatar.png';
 
                     return FeedsCard(
                       id: feeds?[i].id,
