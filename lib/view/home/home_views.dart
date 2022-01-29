@@ -26,7 +26,6 @@ class _HomePageViewsState extends State<HomePageViews> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgDarkMode,
-      extendBodyBehindAppBar: true,
       appBar: HomeAppbar(),
       body: Obx(
         () => _homeController.feedsObsList.isEmpty
@@ -47,20 +46,19 @@ class _HomePageViewsState extends State<HomePageViews> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.only(top: 2),
-                  height: double.infinity,
-                  child: buildBody(),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildListStory(),
+                        buildListFeeds(),
+                      ],
+                    ),
+                  ),
                 ),
               ),
       ),
-    );
-  }
-
-  Column buildBody() {
-    return Column(
-      children: [
-        buildListStory(),
-        buildListFeeds(),
-      ],
     );
   }
 
