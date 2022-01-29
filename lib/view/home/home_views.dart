@@ -17,17 +17,16 @@ class _HomePageViewsState extends State<HomePageViews> {
 
   @override
   void initState() {
-    super.initState();
     listStory = _homeController.getUserStories();
     listFeeds = _homeController.getFeeds();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      extendBodyBehindAppBar: true,
       backgroundColor: bgDarkMode,
+      extendBodyBehindAppBar: true,
       appBar: HomeAppbar(),
       body: Obx(
         () => _homeController.feedsObsList.isEmpty
@@ -45,108 +44,62 @@ class _HomePageViewsState extends State<HomePageViews> {
                   _homeController.getUserStories();
                   _homeController.getFeeds();
                 },
-                child: SafeArea(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: double.infinity,
-                    margin: EdgeInsets.only(top: 2),
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        buildListStory(),
-                        buildListFeeds(),
-                      ],
-                    ),
-                  ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.only(top: 2),
+                  height: double.infinity,
+                  child: buildBody(),
                 ),
               ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: bgDarkMode,
-        elevation: 0,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_filled, color: Colors.white.withOpacity(0.8)),
-            activeIcon: Icon(Icons.home_filled, color: Colors.white),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: Colors.white.withOpacity(0.8)),
-            activeIcon: Icon(Icons.search, color: Colors.white),
-            label: 'Discovery',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.play_rectangle,
-                color: Colors.white.withOpacity(0.8)),
-            activeIcon:
-                Icon(CupertinoIcons.play_rectangle_fill, color: Colors.white),
-            label: 'Reels',
-          ),
-          BottomNavigationBarItem(
-            icon:
-                Icon(CupertinoIcons.bag, color: Colors.white.withOpacity(0.8)),
-            activeIcon: Icon(CupertinoIcons.bag_fill, color: Colors.white),
-            label: 'Shopping',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/andre.png'),
-                ),
-              ),
-            ),
-            label: 'Shopping',
-          ),
-        ],
-      ),
+    );
+  }
+
+  Column buildBody() {
+    return Column(
+      children: [
+        buildListStory(),
+        buildListFeeds(),
+      ],
     );
   }
 
   Container buildListStory() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8),
-      width: double.infinity,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: FutureBuilder<List<UserStory>>(
-            future: listStory,
-            builder: (context, snapshot) {
-              var story = snapshot.data;
+      child: FutureBuilder<List<UserStory>>(
+          future: listStory,
+          builder: (context, snapshot) {
+            var story = snapshot.data;
 
-              return Container(
-                padding: EdgeInsets.only(top: 4, right: 4),
-                width: MediaQuery.of(context).size.width,
-                height: 85,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: story?.length,
-                    itemBuilder: (context, i) {
-                      if (i > 0) {
-                        return GestureDetector(
-                          onTap: () => SnackbarUtils.showStoryInDevelopment(),
-                          child: UserStoryCard(
-                            username: story?[i].username,
-                            avatarURL: story?[i].avatarURL,
-                          ),
-                        );
-                      } else {
-                        return GestureDetector(
-                          onTap: () => SnackbarUtils.showStoryInDevelopment(),
-                          child: CurrentStoryCard(
-                            username: 'Your Story',
-                            avatarURL: 'assets/images/andre.png',
-                          ),
-                        );
-                      }
-                    }),
-              );
-            }),
-      ),
+            return Container(
+              padding: EdgeInsets.only(top: 4, right: 4),
+              width: MediaQuery.of(context).size.width,
+              height: 85,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: story?.length,
+                  itemBuilder: (context, i) {
+                    if (i > 0) {
+                      return GestureDetector(
+                        onTap: () => SnackbarUtils.showStoryInDevelopment(),
+                        child: UserStoryCard(
+                          username: story?[i].username,
+                          avatarURL: story?[i].avatarURL,
+                        ),
+                      );
+                    } else {
+                      return GestureDetector(
+                        onTap: () => SnackbarUtils.showStoryInDevelopment(),
+                        child: CurrentStoryCard(
+                          username: 'Your Story',
+                          avatarURL: 'assets/images/andre.png',
+                        ),
+                      );
+                    }
+                  }),
+            );
+          }),
     );
   }
 

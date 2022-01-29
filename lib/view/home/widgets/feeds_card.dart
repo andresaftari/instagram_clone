@@ -11,6 +11,8 @@ class FeedsCard extends StatefulWidget {
   final String? username, imageUrl, avatarUrl, likes, comments;
   final int? id;
 
+  late final Function onDecTap;
+
   FeedsCard({
     required this.id,
     required this.username,

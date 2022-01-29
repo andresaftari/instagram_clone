@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram_clone/utils/home_bottom_nav.dart';
 import 'package:instagram_clone/view/pages.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
           () => Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, a, b) => const HomePageViews(),
+          pageBuilder: (context, a, b) => const BottomNavViews(),
           transitionDuration: const Duration(seconds: 1),
           transitionsBuilder: (context, anim, a, child) =>
               FadeTransition(opacity: anim, child: child),
