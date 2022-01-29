@@ -25,39 +25,39 @@ class _HomePageViewsState extends State<HomePageViews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       backgroundColor: bgDarkMode,
       appBar: HomeAppbar(),
       body: Obx(
-        () => _homeController.feedsObsList.isEmpty
+            () => _homeController.feedsObsList.isEmpty
             ? Center(
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.blueAccent,
-                ),
-              )
+          child: CircularProgressIndicator(
+            backgroundColor: Colors.blueAccent,
+          ),
+        )
             : RefreshIndicator(
-                displacement: 0.1,
-                color: Colors.transparent,
-                backgroundColor: Colors.transparent,
-                strokeWidth: 0.1,
-                onRefresh: () async {
-                  _homeController.getUserStories();
-                  _homeController.getFeeds();
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.only(top: 2),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        buildListStory(),
-                        buildListFeeds(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+          displacement: 0.1,
+          color: Colors.transparent,
+          backgroundColor: Colors.transparent,
+          strokeWidth: 0.1,
+          onRefresh: () async {
+            _homeController.getUserStories();
+            _homeController.getFeeds();
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: double.infinity,
+            margin: EdgeInsets.only(top: 2),
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              children: [
+                buildListStory(),
+                buildListFeeds(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -65,39 +65,40 @@ class _HomePageViewsState extends State<HomePageViews> {
   Container buildListStory() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8),
-      child: FutureBuilder<List<UserStory>>(
-          future: listStory,
-          builder: (context, snapshot) {
-            var story = snapshot.data;
+      width: double.infinity,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: FutureBuilder<List<UserStory>>(
+            future: listStory,
+            builder: (context, snapshot) {
+              var story = snapshot.data;
 
-            return Container(
-              padding: EdgeInsets.only(top: 4, right: 4),
-              width: MediaQuery.of(context).size.width,
-              height: 85,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: story?.length,
-                  itemBuilder: (context, i) {
-                    if (i > 0) {
-                      return GestureDetector(
-                        onTap: () => SnackbarUtils.showStoryInDevelopment(),
-                        child: UserStoryCard(
-                          username: story?[i].username,
-                          avatarURL: story?[i].avatarURL,
-                        ),
-                      );
-                    } else {
-                      return GestureDetector(
-                        onTap: () => SnackbarUtils.showStoryInDevelopment(),
-                        child: CurrentStoryCard(
+              return Container(
+                padding: EdgeInsets.only(top: 4, right: 4),
+                width: MediaQuery.of(context).size.width,
+                height: 85,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: story?.length,
+                    itemBuilder: (context, i) {
+                      if (i > 0) {
+                        return GestureDetector(
+                          onTap: () => SnackbarUtils.showStoryInDevelopment(),
+                          child: UserStoryCard(
+                            username: story?[i].username,
+                            avatarURL: story?[i].avatarURL,
+                          ),
+                        );
+                      } else {
+                        return CurrentStoryCard(
                           username: 'Your Story',
                           avatarURL: 'assets/images/andre.png',
-                        ),
-                      );
-                    }
-                  }),
-            );
-          }),
+                        );
+                      }
+                    }),
+              );
+            }),
+      ),
     );
   }
 
@@ -113,15 +114,12 @@ class _HomePageViewsState extends State<HomePageViews> {
             return Container(
               padding: EdgeInsets.only(top: 4, right: 4),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 200,
+              height: MediaQuery.of(context).size.height - 250,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: feeds?.length,
                   itemBuilder: (context, i) {
                     print(i);
-
-                    avatar =
-                        feeds?[0].avatarURL ?? 'assets/images/noavatar.png';
 
                     return FeedsCard(
                       id: feeds?[i].id,
