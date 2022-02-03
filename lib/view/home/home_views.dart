@@ -26,7 +26,6 @@ class _HomePageViewsState extends State<HomePageViews> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      extendBodyBehindAppBar: true,
       backgroundColor: bgDarkMode,
       appBar: HomeAppbar(),
       body: Obx(
@@ -114,7 +113,7 @@ class _HomePageViewsState extends State<HomePageViews> {
             return Container(
               padding: EdgeInsets.only(top: 4, right: 4),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 250,
+              height: MediaQuery.of(context).size.height - 240,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: feeds?.length,
@@ -127,7 +126,11 @@ class _HomePageViewsState extends State<HomePageViews> {
                       avatarUrl: feeds?[i].avatarURL,
                       imageUrl: feeds?[i].imageURL,
                       likes: feeds?[i].likeCount,
+                      captions: feeds?[i].captions,
                       comments: feeds?[i].comments,
+                      commentBy: feeds?[i].commentBy,
+                      commentCount: feeds?[i].commentCount,
+                      createdAt: feeds![i].createdAt,
                     );
                   }),
             );

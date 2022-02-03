@@ -1,15 +1,24 @@
 import 'dart:math' as math;
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/controller/home_controller.dart';
+import 'package:instagram_clone/themes/theme_color.dart';
 import 'package:instagram_clone/utils/snackbar_util.dart';
 import 'package:intl/intl.dart';
 
 class FeedsCard extends StatefulWidget {
-  final String? username, imageUrl, avatarUrl, likes, comments;
-  final int? id;
+  final String? username,
+      imageUrl,
+      avatarUrl,
+      likes,
+      captions,
+      comments,
+      commentBy;
+  final int? id, commentCount;
+  final int createdAt;
 
   late final Function onDecTap;
 
@@ -19,7 +28,11 @@ class FeedsCard extends StatefulWidget {
     required this.avatarUrl,
     required this.imageUrl,
     required this.likes,
+    required this.captions,
     required this.comments,
+    required this.commentBy,
+    required this.commentCount,
+    required this.createdAt,
   });
 
   @override
@@ -32,6 +45,7 @@ class _FeedsCardState extends State<FeedsCard> {
   @override
   Widget build(BuildContext context) {
     var count = 0;
+    var created = 0.0;
 
     if (widget.likes != null) {
       count = int.parse(widget.likes.toString());
@@ -39,14 +53,28 @@ class _FeedsCardState extends State<FeedsCard> {
 
     var like = NumberFormat.decimalPattern().format(count);
 
+    widget.createdAt.toInt() > 7 == true
+        ? created = widget.createdAt.toInt() / 7.0
+        : created = widget.createdAt.toDouble();
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildFeedsHeader(),
         widget.imageUrl != null
             ? Image.network(widget.imageUrl ?? '', fit: BoxFit.contain)
             : Image.asset('assets/images/noavatar.png'),
         buildFeedsFooter(like),
-        buildFeedsComments(),
+        buildFeedsCaption(),
+        widget.createdAt.toInt() > 7
+            ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text('${created.toInt()} weeks ago'),
+            )
+            : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text('${created.toInt()} days ago'),
+            ),
       ],
     );
   }
@@ -60,17 +88,15 @@ class _FeedsCardState extends State<FeedsCard> {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(shape: BoxShape.circle),
-              child: GestureDetector(
-                onTap: () => SnackbarUtils.showDebug(
-                  widget.id,
-                  'Tapped feed id: ',
-                  'Tapped Feed',
-                ),
-                child: Image.asset(
-                  widget.avatarUrl ?? 'assets/images/noavatar.png',
+              width: 36,
+              height: 36,
+              margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage(
+                    widget.avatarUrl ?? 'assets/images/noavatar.png',
+                  ),
                 ),
               ),
               clipBehavior: Clip.antiAlias,
@@ -181,36 +207,111 @@ class _FeedsCardState extends State<FeedsCard> {
     );
   }
 
-  Column buildFeedsComments() {
+  Column buildFeedsCaption() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: RichText(
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.start,
             text: TextSpan(
-                text: '${widget.username} ',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
+              text: '${widget.username} ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
+              children: [
+                TextSpan(
+                  text: '${widget.captions} ',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-                children: [
-                  TextSpan(
-                    text: '${widget.comments} ',
+              ],
+            ),
+          ),
+        ),
+        buildFeedsComments(
+          widget.commentCount,
+          widget.comments,
+          widget.commentBy,
+        ),
+      ],
+    );
+  }
+
+  Widget buildFeedsComments(
+    int? commentCount,
+    String? lastComment,
+    String? lastCommenter,
+  ) {
+    return GestureDetector(
+      onTap: () async {
+        SnackbarUtils.showCommentInDevelopment();
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          commentCount != null
+              ? Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                  child: Text(
+                    'View all ${commentCount - 1} comments',
+                    textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
+                      color: Color.fromRGBO(178, 177, 185, 1),
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ]),
+                )
+              : Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                  child: Container(),
+                ),
+          Row(
+            children: [
+              lastCommenter != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                        '${lastCommenter.toString()} ',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: bgLightMode,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 4, left: 8),
+                      child: Container(),
+                    ),
+              lastComment != null
+                  ? Text(
+                      '${lastComment.toString()}',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        color: bgLightMode,
+                        fontSize: 14,
+                      ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Container(),
+                    ),
+            ],
           ),
-        )
-      ],
+        ],
+      ),
     );
   }
 }

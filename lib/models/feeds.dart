@@ -1,7 +1,10 @@
 class Feeds {
-  String username, avatarURL, imageURL, likeCount, comments;
-  int id;
+  String username, avatarURL, imageURL, likeCount, captions;
+  int id, createdAt;
   bool isLiked;
+
+  String? comments, commentBy;
+  int? commentCount;
 
   Feeds({
     required this.id,
@@ -10,7 +13,11 @@ class Feeds {
     required this.imageURL,
     required this.likeCount,
     required this.isLiked,
+    required this.captions,
     required this.comments,
+    required this.commentBy,
+    required this.commentCount,
+    required this.createdAt,
   });
 
   @override

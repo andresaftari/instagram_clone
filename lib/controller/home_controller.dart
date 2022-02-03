@@ -62,12 +62,16 @@ class HomeController extends GetxController {
       var _dummy1 = Feeds(
         id: 1,
         username: 'chevalierlab',
-        avatarURL: 'assets/images/icon_google.png',
+        avatarURL: 'assets/images/chevalier.png',
         imageURL: 'https://daniszaidan.github.io/assets/project/Chevalier.jpg',
         likeCount: '500',
         isLiked: isFeedLiked.value,
-        comments:
+        captions:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        commentBy: 'andresaftari',
+        comments: 'Testing Comment, jalan ga?',
+        commentCount: 4,
+        createdAt: 2,
       );
 
       var _dummy2 = Feeds(
@@ -78,8 +82,12 @@ class HomeController extends GetxController {
             'https://www.bmw.co.id/content/dam/bmw/common/all-models/3-series/series-overview/bmw-3er-overview-page-ms-06.jpg/jcr:content/renditions/cq5dam.resized.img.890.medium.time1627455295591.jpg',
         likeCount: '510688',
         isLiked: isFeedLiked.value,
-        comments:
+        captions:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        commentBy: null,
+        comments: null,
+        commentCount: null,
+        createdAt: 4
       );
 
       var _dummy3 = Feeds(
@@ -90,8 +98,12 @@ class HomeController extends GetxController {
             'https://www.bmw.co.id/content/dam/bmw/common/all-models/3-series/series-overview/bmw-3er-overview-page-cp-xxl.jpg/jcr:content/renditions/cq5dam.resized.img.980.medium.time1627455297346.jpg',
         likeCount: '3560501',
         isLiked: isFeedLiked.value,
-        comments:
+        captions:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        commentBy: 'sukrirachmad',
+        comments: 'Comment Apa?',
+        commentCount: 5,
+        createdAt: 14,
       );
 
       var _dummy4 = Feeds(
@@ -102,8 +114,12 @@ class HomeController extends GetxController {
             'https://lh5.googleusercontent.com/p/AF1QipOWRpuyAmHjW2PKfu9H7ZhMIH08iY35SCddf4-0=w408-h306-k-no',
         likeCount: '104555',
         isLiked: isFeedLiked.value,
-        comments:
+        captions:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        commentBy: null,
+        comments: null,
+        commentCount: null,
+        createdAt: 8,
       );
 
       listFeeds.add(_dummy1);

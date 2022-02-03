@@ -11,3 +11,4 @@ import 'package:instagram_clone/view/home/widgets/home_appbar.dart';
 import 'package:instagram_clone/view/home/widgets/user_story_card.dart';
 
 part 'home/home_views.dart';
+part 'discovery/discovery_views.dart';

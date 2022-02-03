@@ -80,24 +80,22 @@ class _BottomNavViewsState extends State<BottomNavViews> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: PersistentTabView(
-          context,
-          controller: _controller,
-          screens: _pageViews(),
-          items: _bottomNavItems(),
-          confineInSafeArea: true,
-          backgroundColor: Colors.black,
-          navBarStyle: NavBarStyle.style6,
-          onItemSelected: (index) async {
-            SnackbarUtils.showDebug(
-              'Masih dalam pengembangan',
-              'Bottom Navigation',
-              'Utility',
-            );
-          },
-        ),
+    return Container(
+      child: PersistentTabView(
+        context,
+        controller: _controller,
+        screens: _pageViews(),
+        items: _bottomNavItems(),
+        confineInSafeArea: true,
+        backgroundColor: Colors.black,
+        navBarStyle: NavBarStyle.style6,
+        onItemSelected: (index) async {
+          SnackbarUtils.showDebug(
+            'Masih dalam pengembangan',
+            'Bottom Navigation',
+            'Utility',
+          );
+        },
       ),
     );
   }
