@@ -29,34 +29,34 @@ class _HomePageViewsState extends State<HomePageViews> {
       backgroundColor: bgDarkMode,
       appBar: HomeAppbar(),
       body: Obx(
-            () => _homeController.feedsObsList.isEmpty
+        () => _homeController.feedsObsList.isEmpty
             ? Center(
-          child: CircularProgressIndicator(
-            backgroundColor: Colors.blueAccent,
-          ),
-        )
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.blueAccent,
+                ),
+              )
             : RefreshIndicator(
-          displacement: 0.1,
-          color: Colors.transparent,
-          backgroundColor: Colors.transparent,
-          strokeWidth: 0.1,
-          onRefresh: () async {
-            _homeController.getUserStories();
-            _homeController.getFeeds();
-          },
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: double.infinity,
-            margin: EdgeInsets.only(top: 2),
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              children: [
-                buildListStory(),
-                buildListFeeds(),
-              ],
-            ),
-          ),
-        ),
+                displacement: 0.1,
+                color: Colors.transparent,
+                backgroundColor: Colors.transparent,
+                strokeWidth: 0.1,
+                onRefresh: () async {
+                  await _homeController.getUserStories();
+                  await _homeController.getFeeds();
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: double.infinity,
+                  margin: EdgeInsets.only(top: 2),
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      buildListStory(),
+                      buildListFeeds(),
+                    ],
+                  ),
+                ),
+              ),
       ),
     );
   }
@@ -130,7 +130,7 @@ class _HomePageViewsState extends State<HomePageViews> {
                       comments: feeds?[i].comments,
                       commentBy: feeds?[i].commentBy,
                       commentCount: feeds?[i].commentCount,
-                      createdAt: feeds![i].createdAt,
+                      createdAt: feeds?[i].createdAt,
                     );
                   }),
             );

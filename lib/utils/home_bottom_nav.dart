@@ -28,7 +28,7 @@ class _BottomNavViewsState extends State<BottomNavViews> {
 
   List<Widget> _pageViews() => [
         HomePageViews(),
-        Container(), // Discovery
+        DiscoveryPageViews(), // Discovery
         Container(), // Reels
         Container(), // Shopping
         Container(), // Account

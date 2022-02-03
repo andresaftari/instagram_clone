@@ -17,8 +17,7 @@ class FeedsCard extends StatefulWidget {
       captions,
       comments,
       commentBy;
-  final int? id, commentCount;
-  final int createdAt;
+  final int? id, commentCount, createdAt;
 
   late final Function onDecTap;
 
@@ -53,9 +52,9 @@ class _FeedsCardState extends State<FeedsCard> {
 
     var like = NumberFormat.decimalPattern().format(count);
 
-    widget.createdAt.toInt() > 7 == true
-        ? created = widget.createdAt.toInt() / 7.0
-        : created = widget.createdAt.toDouble();
+    widget.createdAt!.toInt() > 7 == true
+        ? created = widget.createdAt!.toInt() / 7.0
+        : created = widget.createdAt!.toDouble();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,15 +65,15 @@ class _FeedsCardState extends State<FeedsCard> {
             : Image.asset('assets/images/noavatar.png'),
         buildFeedsFooter(like),
         buildFeedsCaption(),
-        widget.createdAt.toInt() > 7
+        widget.createdAt!.toInt() > 7
             ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text('${created.toInt()} weeks ago'),
-            )
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text('${created.toInt()} weeks ago'),
+              )
             : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text('${created.toInt()} days ago'),
-            ),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text('${created.toInt()} days ago'),
+              ),
       ],
     );
   }
