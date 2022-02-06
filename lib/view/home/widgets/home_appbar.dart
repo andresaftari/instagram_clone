@@ -8,14 +8,14 @@ class HomeAppbar extends StatefulWidget implements PreferredSizeWidget {
   _HomeAppbarState createState() => _HomeAppbarState();
 
   @override
-  Size get preferredSize => Size.fromHeight(60);
+  Size get preferredSize => Size.fromHeight(50);
 }
 
 class _HomeAppbarState extends State<HomeAppbar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 0.15,
+      elevation: 0.12,
       backgroundColor: bgDarkMode,
       shadowColor: bgLightMode,
       title: Text('Instaclone'),

@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -260,7 +259,7 @@ class _FeedsCardState extends State<FeedsCard> {
           commentCount != null
               ? Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                   child: Text(
                     'View all ${commentCount - 1} comments',
                     textAlign: TextAlign.start,
@@ -271,15 +270,17 @@ class _FeedsCardState extends State<FeedsCard> {
                   ),
                 )
               : Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 8,
+                  ),
                   child: Container(),
                 ),
           Row(
             children: [
               lastCommenter != null
                   ? Padding(
-                      padding: const EdgeInsets.only(left: 8),
+                      padding: const EdgeInsets.only(left: 8, bottom: 8),
                       child: Text(
                         '${lastCommenter.toString()} ',
                         textAlign: TextAlign.start,
@@ -291,7 +292,11 @@ class _FeedsCardState extends State<FeedsCard> {
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.only(top: 4, left: 8),
+                      padding: const EdgeInsets.only(
+                        top: 4,
+                        left: 8,
+                        bottom: 4,
+                      ),
                       child: Container(),
                     ),
               lastComment != null
@@ -304,7 +309,7 @@ class _FeedsCardState extends State<FeedsCard> {
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.only(top: 4),
+                      padding: const EdgeInsets.only(top: 4, bottom: 4),
                       child: Container(),
                     ),
             ],

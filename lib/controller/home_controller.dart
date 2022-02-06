@@ -59,6 +59,20 @@ class HomeController extends GetxController {
     List<Feeds> listFeeds = [];
 
     try {
+      var _init = Feeds(
+        id: 0,
+        username: '',
+        avatarURL: '',
+        imageURL: '',
+        likeCount: '',
+        isLiked: false,
+        captions: '',
+        commentBy: '',
+        comments: '',
+        commentCount: 0,
+        createdAt: 0,
+      );
+
       var _dummy1 = Feeds(
         id: 1,
         username: 'chevalierlab',
@@ -75,20 +89,19 @@ class HomeController extends GetxController {
       );
 
       var _dummy2 = Feeds(
-        id: 2,
-        username: 'bmw_official',
-        avatarURL: 'assets/images/bmw.png',
-        imageURL:
-            'https://www.bmw.co.id/content/dam/bmw/common/all-models/3-series/series-overview/bmw-3er-overview-page-ms-06.jpg/jcr:content/renditions/cq5dam.resized.img.890.medium.time1627455295591.jpg',
-        likeCount: '510688',
-        isLiked: isFeedLiked.value,
-        captions:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        commentBy: null,
-        comments: null,
-        commentCount: null,
-        createdAt: 4
-      );
+          id: 2,
+          username: 'bmw_official',
+          avatarURL: 'assets/images/bmw.png',
+          imageURL:
+              'https://www.bmw.co.id/content/dam/bmw/common/all-models/3-series/series-overview/bmw-3er-overview-page-ms-06.jpg/jcr:content/renditions/cq5dam.resized.img.890.medium.time1627455295591.jpg',
+          likeCount: '510688',
+          isLiked: isFeedLiked.value,
+          captions:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          commentBy: null,
+          comments: null,
+          commentCount: null,
+          createdAt: 4);
 
       var _dummy3 = Feeds(
         id: 3,
@@ -122,6 +135,7 @@ class HomeController extends GetxController {
         createdAt: 8,
       );
 
+      listFeeds.add(_init);
       listFeeds.add(_dummy1);
       listFeeds.add(_dummy2);
       listFeeds.add(_dummy3);
