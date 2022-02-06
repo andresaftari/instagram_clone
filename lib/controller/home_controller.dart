@@ -83,7 +83,7 @@ class HomeController extends GetxController {
         captions:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         commentBy: 'andresaftari',
-        comments: 'Testing Comment, jalan ga?',
+        comments: 'Test 1st Comment',
         commentCount: 4,
         createdAt: 2,
       );
@@ -114,7 +114,7 @@ class HomeController extends GetxController {
         captions:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         commentBy: 'sukrirachmad',
-        comments: 'Comment Apa?',
+        comments: 'Test 2nd Comment',
         commentCount: 5,
         createdAt: 14,
       );

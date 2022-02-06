@@ -28,10 +28,18 @@ class _BottomNavViewsState extends State<BottomNavViews> {
 
   List<Widget> _pageViews() => [
         HomePageViews(),
-        DiscoveryPageViews(), // Discovery
-        Container(), // Reels
-        Container(), // Shopping
-        Container(), // Account
+        DiscoveryPageViews(),
+        // Discovery
+        Container(),
+        // Reels
+        Container(),
+        // Shopping
+        ProfilePageViews(
+          username: 'andresaftari',
+          fullname: 'Andre Saftari',
+          avatarUrl: 'assets/images/andre.png',
+        ),
+        // Account
       ];
 
   List<PersistentBottomNavBarItem> _bottomNavItems() => [
@@ -90,11 +98,16 @@ class _BottomNavViewsState extends State<BottomNavViews> {
         backgroundColor: Colors.black,
         navBarStyle: NavBarStyle.style6,
         onItemSelected: (index) async {
-          SnackbarUtils.showDebug(
-            'Masih dalam pengembangan',
-            'Bottom Navigation',
-            'Utility',
-          );
+          switch (index) {
+            case 2:
+            case 3:
+              SnackbarUtils.showDebug(
+                'Masih dalam pengembangan',
+                'Bottom Navigation',
+                'Utility',
+              );
+              break;
+          }
         },
       ),
     );

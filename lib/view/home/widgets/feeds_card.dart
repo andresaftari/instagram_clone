@@ -67,11 +67,23 @@ class _FeedsCardState extends State<FeedsCard> {
         widget.createdAt!.toInt() > 7
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text('${created.toInt()} weeks ago'),
+                child: Text(
+                  '${created.toInt()} weeks ago',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color:commentGrey,
+                  ),
+                ),
               )
             : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text('${created.toInt()} days ago'),
+                child: Text(
+                  '${created.toInt()} days ago',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: commentGrey,
+                  ),
+                ),
               ),
       ],
     );
@@ -86,9 +98,9 @@ class _FeedsCardState extends State<FeedsCard> {
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              width: 36,
-              height: 36,
-              margin: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+              width: 34,
+              height: 34,
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
@@ -112,11 +124,11 @@ class _FeedsCardState extends State<FeedsCard> {
         Padding(
           padding: EdgeInsets.only(right: 4),
           child: GestureDetector(
-            onTap: () => SnackbarUtils.showStoryInDevelopment(),
+            onTap: () => SnackbarUtils.showFeedInDevelopment(),
             child: Icon(
               Icons.more_vert,
               color: Colors.white,
-              size: 24,
+              size: 22,
             ),
           ),
         ),
@@ -264,7 +276,7 @@ class _FeedsCardState extends State<FeedsCard> {
                     'View all ${commentCount - 1} comments',
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      color: Color.fromRGBO(178, 177, 185, 1),
+                      color: commentGrey,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -280,7 +292,8 @@ class _FeedsCardState extends State<FeedsCard> {
             children: [
               lastCommenter != null
                   ? Padding(
-                      padding: const EdgeInsets.only(left: 8, bottom: 8),
+                      padding:
+                          const EdgeInsets.only(top: 4, left: 8, bottom: 4),
                       child: Text(
                         '${lastCommenter.toString()} ',
                         textAlign: TextAlign.start,
@@ -292,11 +305,8 @@ class _FeedsCardState extends State<FeedsCard> {
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.only(
-                        top: 4,
-                        left: 8,
-                        bottom: 4,
-                      ),
+                      padding:
+                          const EdgeInsets.only(top: 4, left: 8, bottom: 4),
                       child: Container(),
                     ),
               lastComment != null
