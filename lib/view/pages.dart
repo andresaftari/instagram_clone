@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:instagram_clone/data/domain/controller/discovery_controller.dart';
 import 'package:instagram_clone/data/domain/controller/home_controller.dart';
+import 'package:instagram_clone/models/discovery.dart';
 import 'package:instagram_clone/models/feeds.dart';
 import 'package:instagram_clone/models/story.dart';
 import 'package:instagram_clone/themes/theme_color.dart';

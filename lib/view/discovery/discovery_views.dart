@@ -8,6 +8,20 @@ class DiscoveryPageViews extends StatefulWidget {
 }
 
 class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
+  final DiscoveryController _discoveryController = Get.find();
+
+  late Future<List<Discovery>> listDiscovery;
+
+  @override
+  void initState() {
+    listDiscovery = _discoveryController.getDiscoveryFeeds();
+    super.initState();
+  }
+
+  Future _onRefresh() async {
+    await _discoveryController.getDiscoveryFeeds();
+  }
+
   final _pattern = [
     QuiltedGridTile(2, 2),
     QuiltedGridTile(1, 1),
@@ -22,19 +36,39 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
       extendBody: true,
       body: SafeArea(
         bottom: false,
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: SearchViews(),
-              ),
-            ],
+        child: SingleChildScrollView(
+          child: Container(
+            child: Obx(
+              () {
+                return _discoveryController.discoveryObsList.isEmpty
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Loading Data...'),
+                            SizedBox(height: 8),
+                            CircularProgressIndicator.adaptive(),
+                          ],
+                        ),
+                      )
+                    : RefreshIndicator(
+                        onRefresh: _onRefresh,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              child: SearchViews(),
+                            ),
+                          ],
+                        ),
+                      );
+              },
+            ),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
           ),
         ),
       ),
@@ -51,9 +85,7 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
         pattern: _pattern,
       ),
       childrenDelegate: SliverChildBuilderDelegate(
-        (context, index) {
-
-        },
+        (context, index) {},
       ),
     );
   }

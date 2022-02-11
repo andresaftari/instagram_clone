@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/data/binding/controller_binding.dart';
 import 'package:instagram_clone/data/domain/controller/auth_controller.dart';
+import 'package:instagram_clone/data/domain/controller/discovery_controller.dart';
 import 'package:instagram_clone/data/domain/controller/home_controller.dart';
 import 'package:instagram_clone/data/domain/controller/profile_controller.dart';
 import 'package:instagram_clone/view/splash_screen.dart';
@@ -13,6 +14,7 @@ void main() async {
   Get.put(HomeController(), permanent: true);
   Get.put(AuthController(), permanent: true);
   Get.put(ProfileController(), permanent: true);
+  Get.put(DiscoveryController(), permanent: true);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
