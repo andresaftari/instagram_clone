@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:instagram_clone/controller/auth_controller.dart';
-import 'package:instagram_clone/controller/home_controller.dart';
-import 'package:instagram_clone/controller/profile_controller.dart';
+import 'package:instagram_clone/data/domain/controller/auth_controller.dart';
+import 'package:instagram_clone/data/domain/controller/home_controller.dart';
+import 'package:instagram_clone/data/domain/controller/profile_controller.dart';
 
 class ControllerBinding extends Bindings {
   @override

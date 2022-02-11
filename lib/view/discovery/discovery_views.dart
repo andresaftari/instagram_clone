@@ -8,6 +8,13 @@ class DiscoveryPageViews extends StatefulWidget {
 }
 
 class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
+  final _pattern = [
+    QuiltedGridTile(2, 2),
+    QuiltedGridTile(1, 1),
+    QuiltedGridTile(1, 1),
+    QuiltedGridTile(1, 2),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +37,23 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  GridView buildDiscoveryGridViews() {
+    return GridView.custom(
+      gridDelegate: SliverQuiltedGridDelegate(
+        crossAxisCount: 3,
+        mainAxisSpacing: 3,
+        crossAxisSpacing: 3,
+        repeatPattern: QuiltedGridRepeatPattern.inverted,
+        pattern: _pattern,
+      ),
+      childrenDelegate: SliverChildBuilderDelegate(
+        (context, index) {
+
+        },
       ),
     );
   }

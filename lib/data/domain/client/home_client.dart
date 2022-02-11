@@ -2,16 +2,14 @@ import 'package:get/get.dart';
 import 'package:instagram_clone/models/feeds.dart';
 import 'package:instagram_clone/models/story.dart';
 
-class HomeController extends GetxController {
-  var storyObsList = List<UserStory>.empty(growable: true).obs;
-  var feedsObsList = List<Feeds>.empty(growable: true).obs;
+class HomeClient {
   var isFeedLiked = false.obs;
 
   void toggleLikedFeed(var id) {
     isFeedLiked.value = !isFeedLiked.value;
   }
 
-  Future<List<UserStory>> getUserStories() async {
+  Future getUserStories() async {
     List<UserStory> listStory = [];
 
     try {
@@ -46,8 +44,6 @@ class HomeController extends GetxController {
       listStory.add(_dummy3);
       listStory.add(_dummy4);
       listStory.add(_dummy5);
-
-      storyObsList.addAll(listStory);
     } catch (e) {
       print(e.toString());
     }
@@ -98,9 +94,9 @@ class HomeController extends GetxController {
           isLiked: isFeedLiked.value,
           captions:
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-          commentBy: null,
-          comments: null,
-          commentCount: null,
+          commentBy: '',
+          comments: '',
+          commentCount: 0,
           createdAt: 4);
 
       var _dummy3 = Feeds(
@@ -129,9 +125,9 @@ class HomeController extends GetxController {
         isLiked: isFeedLiked.value,
         captions:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        commentBy: null,
-        comments: null,
-        commentCount: null,
+        commentBy: '',
+        comments: '',
+        commentCount: 0,
         createdAt: 8,
       );
 
@@ -141,29 +137,10 @@ class HomeController extends GetxController {
       listFeeds.add(_dummy3);
       listFeeds.add(_dummy4);
 
-      feedsObsList.addAll(listFeeds);
     } catch (e) {
       print(e.toString());
     }
 
     return listFeeds;
   }
-
-// Future<Feeds> setFeedsLike(var id) async {
-//   List<Feeds> listFeeds = [];
-//   var feeds;
-//
-//   try {
-//     await getFeeds().then((value) {
-//       listFeeds.addAll(value);
-//       feeds = listFeeds[id - 1];
-//
-//       feeds.isLiked = !listFeeds[id - 1].isLiked;
-//     });
-//   } catch (e) {
-//     print(e.toString());
-//   }
-//
-//   return feeds;
-// }
 }

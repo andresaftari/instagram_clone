@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:instagram_clone/controller/auth_controller.dart';
-import 'package:instagram_clone/controller/binding/controller_binding.dart';
-import 'package:instagram_clone/controller/home_controller.dart';
-import 'package:instagram_clone/controller/profile_controller.dart';
+import 'package:instagram_clone/data/binding/controller_binding.dart';
+import 'package:instagram_clone/data/domain/controller/auth_controller.dart';
+import 'package:instagram_clone/data/domain/controller/home_controller.dart';
+import 'package:instagram_clone/data/domain/controller/profile_controller.dart';
 import 'package:instagram_clone/view/splash_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Get.put(HomeController(), permanent: true);
   Get.put(AuthController(), permanent: true);
   Get.put(ProfileController(), permanent: true);
 
-  runApp(MyApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {

@@ -1,10 +1,11 @@
 class Feeds {
-  String username, avatarURL, imageURL, likeCount, captions;
-  int id;
+  String username, likeCount, captions;
+  String? avatarURL, imageURL;
+  int id, createdAt;
   bool isLiked;
 
-  String? comments, commentBy;
-  int? commentCount, createdAt;
+  String comments, commentBy;
+  int commentCount;
 
   Feeds({
     required this.id,

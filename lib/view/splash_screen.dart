@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:instagram_clone/utils/home_bottom_nav.dart';
-import 'package:instagram_clone/view/pages.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

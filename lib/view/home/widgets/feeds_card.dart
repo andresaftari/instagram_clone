@@ -3,20 +3,15 @@ import 'dart:math' as math;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:instagram_clone/controller/home_controller.dart';
+import 'package:instagram_clone/data/domain/controller/home_controller.dart';
 import 'package:instagram_clone/themes/theme_color.dart';
 import 'package:instagram_clone/utils/snackbar_util.dart';
 import 'package:intl/intl.dart';
 
 class FeedsCard extends StatefulWidget {
-  final String? username,
-      imageUrl,
-      avatarUrl,
-      likes,
-      captions,
-      comments,
-      commentBy;
-  final int? id, commentCount, createdAt;
+  final String username, likes, captions, comments, commentBy;
+  final String? imageUrl, avatarUrl;
+  final int id, commentCount, createdAt;
 
   late final Function onDecTap;
 
@@ -45,15 +40,15 @@ class _FeedsCardState extends State<FeedsCard> {
     var count = 0;
     var created = 0.0;
 
-    if (widget.likes != null) {
+    if (widget.likes.isNotEmpty) {
       count = int.parse(widget.likes.toString());
     }
 
     var like = NumberFormat.decimalPattern().format(count);
 
-    widget.createdAt!.toInt() > 7 == true
-        ? created = widget.createdAt!.toInt() / 7.0
-        : created = widget.createdAt!.toDouble();
+    widget.createdAt.toInt() > 7 == true
+        ? created = widget.createdAt.toInt() / 7.0
+        : created = widget.createdAt.toDouble();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,14 +59,14 @@ class _FeedsCardState extends State<FeedsCard> {
             : Image.asset('assets/images/noavatar.png'),
         buildFeedsFooter(like),
         buildFeedsCaption(),
-        widget.createdAt!.toInt() > 7
+        widget.createdAt.toInt() > 7
             ? Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   '${created.toInt()} weeks ago',
                   style: TextStyle(
                     fontSize: 12,
-                    color:commentGrey,
+                    color: commentGrey,
                   ),
                 ),
               )
@@ -112,7 +107,7 @@ class _FeedsCardState extends State<FeedsCard> {
               clipBehavior: Clip.antiAlias,
             ),
             Text(
-              widget.username ?? 'Instagram User',
+              widget.username,
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
