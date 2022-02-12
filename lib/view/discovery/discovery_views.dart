@@ -22,13 +22,6 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
     await _discoveryController.getDiscoveryFeeds();
   }
 
-  final _pattern = [
-    QuiltedGridTile(2, 2),
-    QuiltedGridTile(1, 1),
-    QuiltedGridTile(1, 1),
-    QuiltedGridTile(1, 2),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +31,8 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
         bottom: false,
         child: SingleChildScrollView(
           child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             child: Obx(
               () {
                 return _discoveryController.discoveryObsList.isEmpty
@@ -62,31 +57,67 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
                               ),
                               child: SearchViews(),
                             ),
+                            GestureDetector(
+                              onTap: () {
+                                SnackbarUtils.showDiscoveryFeedsInDevelopment();
+                              },
+                              child: buildDiscoveryGridViews(),
+                            ),
                           ],
                         ),
                       );
               },
             ),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
           ),
         ),
       ),
     );
   }
 
-  GridView buildDiscoveryGridViews() {
-    return GridView.custom(
-      gridDelegate: SliverQuiltedGridDelegate(
-        crossAxisCount: 3,
-        mainAxisSpacing: 3,
-        crossAxisSpacing: 3,
-        repeatPattern: QuiltedGridRepeatPattern.inverted,
-        pattern: _pattern,
-      ),
-      childrenDelegate: SliverChildBuilderDelegate(
-        (context, index) {},
-      ),
-    );
+  Widget buildDiscoveryGridViews() {
+    return FutureBuilder<List<Discovery>>(
+        future: listDiscovery,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var discoveryList = snapshot.data!;
+            // print('Discovery: Views Passed');
+
+            List<Widget> cardList = [];
+
+            for (var element in discoveryList) {
+              if (element.id > 1) {
+                cardList.add(
+                  DiscoveryCard(
+                    isPhoto: element.isPhoto,
+                    isReels: element.isReels,
+                    isSlideshow: element.isSlideshows,
+                    contentUrl: element.contentUrl,
+                    index: element.id - 1,
+                    width: MediaQuery.of(context).size.width.toInt(),
+                    height: 120,
+                  ),
+                );
+              } else {
+                cardList.add(
+                  DiscoveryCard(
+                    isPhoto: element.isPhoto,
+                    isReels: element.isReels,
+                    isSlideshow: element.isSlideshows,
+                    contentUrl: element.contentUrl,
+                    index: element.id - 1,
+                    width: MediaQuery.of(context).size.width.toInt(),
+                    height: 320,
+                  ),
+                );
+              }
+            }
+
+            return StaggeredGrid.count(crossAxisCount: 2, children: cardList);
+          } else {
+            return Center(
+              child: Text('No Data...'),
+            );
+          }
+        });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/themes/theme_color.dart';
+import 'package:instagram_clone/utils/snackbar_util.dart';
 
 class SearchViews extends StatefulWidget {
   const SearchViews({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _SearchViewsState extends State<SearchViews> {
           autofocus: false,
           autocorrect: false,
           textAlign: TextAlign.start,
+          onTap: () => SnackbarUtils.showDiscoverySearchInDevelopment(),
           textAlignVertical: TextAlignVertical.bottom,
           decoration: InputDecoration(
             filled: true,

@@ -115,11 +115,11 @@ class _HomePageViewsState extends State<HomePageViews> {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: 80,
-        child: FutureBuilder<dynamic>(
+        child: FutureBuilder<List<UserStory>>(
           future: listStory,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              var storyList = snapshot.data;
+              var storyList = snapshot.data!;
               // print('Story: Views Passed');
 
               return ListView.builder(

@@ -10,6 +10,7 @@ import 'package:instagram_clone/themes/theme_color.dart';
 import 'package:instagram_clone/utils/home_appbar.dart';
 import 'package:instagram_clone/utils/profile_appbar.dart';
 import 'package:instagram_clone/utils/snackbar_util.dart';
+import 'package:instagram_clone/view/discovery/widgets/discovery_card.dart';
 import 'package:instagram_clone/view/discovery/widgets/search_views.dart';
 import 'package:instagram_clone/view/home/widgets/feeds_card.dart';
 import 'package:instagram_clone/view/home/widgets/user_story_card.dart';

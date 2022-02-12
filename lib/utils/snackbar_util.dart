@@ -37,6 +37,20 @@ class SnackbarUtils {
         colorText: Colors.white,
       );
 
+  static void showDiscoveryFeedsInDevelopment() => Get.snackbar(
+    'Discovery Feeds',
+    'Masih dalam pengembangan',
+    duration: Duration(seconds: 2),
+    colorText: Colors.white,
+  );
+
+  static void showDiscoverySearchInDevelopment() => Get.snackbar(
+    'Discovery Search',
+    'Masih dalam pengembangan',
+    duration: Duration(seconds: 2),
+    colorText: Colors.white,
+  );
+
   static void showDebug(output, message, tag) => Get.snackbar(
         tag,
         '$message: $output',
