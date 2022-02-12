@@ -11,6 +11,8 @@ class DiscoveryClient {
         isPhoto: true,
         isReels: false,
         isSlideshows: true,
+        width: 240,
+        height: 240,
       );
       var _dummy2 = Discovery(
         id: 2,
@@ -18,6 +20,8 @@ class DiscoveryClient {
         isPhoto: true,
         isReels: false,
         isSlideshows: false,
+        width: 120,
+        height: 120,
       );
       var _dummy3 = Discovery(
         id: 3,
@@ -25,6 +29,8 @@ class DiscoveryClient {
         isPhoto: true,
         isReels: false,
         isSlideshows: false,
+        width: 160,
+        height: 160,
       );
       var _dummy4 = Discovery(
         id: 4,
@@ -32,6 +38,8 @@ class DiscoveryClient {
         isPhoto: true,
         isReels: false,
         isSlideshows: true,
+        width: 120,
+        height: 120,
       );
       var _dummy5 = Discovery(
         id: 5,
@@ -39,6 +47,8 @@ class DiscoveryClient {
         isPhoto: true,
         isReels: false,
         isSlideshows: true,
+        width: 160,
+        height: 160,
       );
       var _dummy6 = Discovery(
         id: 6,
@@ -46,6 +56,8 @@ class DiscoveryClient {
         isPhoto: true,
         isReels: false,
         isSlideshows: true,
+        width: 160,
+        height: 160,
       );
       var _dummy7 = Discovery(
         id: 7,
@@ -53,6 +65,8 @@ class DiscoveryClient {
         isPhoto: true,
         isReels: false,
         isSlideshows: false,
+        width: 240,
+        height: 240,
       );
 
       discoveryList.add(_dummy1);

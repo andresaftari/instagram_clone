@@ -32,7 +32,6 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
         child: SingleChildScrollView(
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
             child: Obx(
               () {
                 return _discoveryController.discoveryObsList.isEmpty
@@ -48,34 +47,38 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
                       )
                     : RefreshIndicator(
                         onRefresh: _onRefresh,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
-                              child: GestureDetector(
-                                child: SearchViews(),
-                                onTap: () {
-                                  SnackbarUtils.showDiscoverySearchInDevelopment();
-                                },
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                SnackbarUtils.showDiscoveryFeedsInDevelopment();
-                              },
-                              child: buildDiscoveryGridViews(),
-                            ),
-                          ],
-                        ),
+                        child: buildDiscoveryBody(),
                       );
               },
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildDiscoveryBody() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
+          child: GestureDetector(
+            child: SearchViews(),
+            onTap: () {
+              SnackbarUtils.showDiscoverySearchInDevelopment();
+            },
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            SnackbarUtils.showDiscoveryFeedsInDevelopment();
+          },
+          child: buildDiscoveryGridViews(),
+        ),
+      ],
     );
   }
 
@@ -90,37 +93,94 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
             List<Widget> cardList = [];
 
             for (var element in discoveryList) {
-              if (element.id > 1) {
-                cardList.add(
-                  DiscoveryCard(
-                    isPhoto: element.isPhoto,
-                    isReels: element.isReels,
-                    isSlideshow: element.isSlideshows,
-                    contentUrl: element.contentUrl,
-                    index: element.id - 1,
-                    width: MediaQuery.of(context).size.width.toInt(),
-                    height: 120,
-                  ),
-                );
-              } else {
-                cardList.add(
-                  DiscoveryCard(
-                    isPhoto: element.isPhoto,
-                    isReels: element.isReels,
-                    isSlideshow: element.isSlideshows,
-                    contentUrl: element.contentUrl,
-                    index: element.id - 1,
-                    width: MediaQuery.of(context).size.width.toInt(),
-                    height: 320,
-                  ),
-                );
-              }
+              cardList.add(
+                DiscoveryCard(
+                  isPhoto: element.isPhoto,
+                  isReels: element.isReels,
+                  isSlideshow: element.isSlideshows,
+                  contentUrl: element.contentUrl,
+                  index: element.id - 1,
+                  width: element.width,
+                  height: element.height,
+                ),
+              );
+              // if (element.id > 1) {
+              //   cardList.add(
+              //     DiscoveryCard(
+              //       isPhoto: element.isPhoto,
+              //       isReels: element.isReels,
+              //       isSlideshow: element.isSlideshows,
+              //       contentUrl: element.contentUrl,
+              //       index: element.id - 1,
+              //       width: MediaQuery.of(context).size.width.toInt(),
+              //       height: 120,
+              //     ),
+              //   );
+              // } else {
+              //   cardList.add(
+              //     DiscoveryCard(
+              //       isPhoto: element.isPhoto,
+              //       isReels: element.isReels,
+              //       isSlideshow: element.isSlideshows,
+              //       contentUrl: element.contentUrl,
+              //       index: element.id - 1,
+              //       width: MediaQuery.of(context).size.width.toInt(),
+              //       height: 320,
+              //     ),
+              //   );
+              // }
             }
 
-            return StaggeredGrid.count(crossAxisCount: 2, children: cardList);
+            return StaggeredGrid.count(crossAxisCount: 3, children: cardList);
           } else {
             return Center(child: Text('No Data...'));
           }
         });
   }
+
+  // Widget buildDiscoveryGridTile() {
+  //   return FutureBuilder<List<Discovery>>(
+  //     future: listDiscovery,
+  //     builder: (context, snapshot) {
+  //       if (snapshot.hasData) {
+  //         var discoveryList = snapshot.data!;
+  //
+  //         print(discoveryList.toString());
+  //
+  //         return Container(
+  //           width: MediaQuery.of(context).size.width,
+  //           height: MediaQuery.of(context).size.height,
+  //           child: GridView.custom(
+  //             gridDelegate: SliverQuiltedGridDelegate(
+  //               repeatPattern: QuiltedGridRepeatPattern.inverted,
+  //               crossAxisCount: discoveryList.length - 1,
+  //               pattern: const [
+  //                 QuiltedGridTile(2, 2),
+  //                 QuiltedGridTile(1, 1),
+  //                 QuiltedGridTile(1, 1),
+  //                 QuiltedGridTile(1, 2),
+  //               ],
+  //             ),
+  //             childrenDelegate: SliverChildBuilderDelegate(
+  //               (context, index) {
+  //                 return DiscoveryCard(
+  //                   isPhoto: discoveryList[index].isPhoto,
+  //                   isReels: discoveryList[index].isReels,
+  //                   isSlideshow: discoveryList[index].isSlideshows,
+  //                   contentUrl: discoveryList[index].contentUrl,
+  //                   index: index,
+  //                   width: MediaQuery.of(context).size.width.toInt(),
+  //                   height: 400,
+  //                 );
+  //               },
+  //               childCount: discoveryList.length,
+  //             ),
+  //           ),
+  //         );
+  //       } else {
+  //         return Center(child: Text('No Data...'));
+  //       }
+  //     },
+  //   );
+  // }
 }
