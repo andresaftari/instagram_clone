@@ -55,7 +55,12 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
                                 horizontal: 16,
                                 vertical: 8,
                               ),
-                              child: SearchViews(),
+                              child: GestureDetector(
+                                child: SearchViews(),
+                                onTap: () {
+                                  SnackbarUtils.showDiscoverySearchInDevelopment();
+                                },
+                              ),
                             ),
                             GestureDetector(
                               onTap: () {
@@ -114,9 +119,7 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
 
             return StaggeredGrid.count(crossAxisCount: 2, children: cardList);
           } else {
-            return Center(
-              child: Text('No Data...'),
-            );
+            return Center(child: Text('No Data...'));
           }
         });
   }

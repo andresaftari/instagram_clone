@@ -23,8 +23,8 @@ class _SearchViewsState extends State<SearchViews> {
         child: TextFormField(
           autofocus: false,
           autocorrect: false,
+          enabled: false,
           textAlign: TextAlign.start,
-          onTap: () => SnackbarUtils.showDiscoverySearchInDevelopment(),
           textAlignVertical: TextAlignVertical.bottom,
           decoration: InputDecoration(
             filled: true,
