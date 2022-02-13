@@ -1,5 +1,5 @@
 class Discovery {
-  int id, width, height;
+  int id;
   String contentUrl;
   bool isPhoto;
   bool isReels;
@@ -11,8 +11,6 @@ class Discovery {
     required this.isPhoto,
     required this.isReels,
     required this.isSlideshows,
-    required this.width,
-    required this.height,
   });
 
   @override

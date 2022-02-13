@@ -93,6 +93,9 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
             List<Widget> cardList = [];
 
             for (var element in discoveryList) {
+              var width = element.isReels ? 240 : 120;
+              var height = element.isReels ? 240 : 120;
+
               cardList.add(
                 DiscoveryCard(
                   isPhoto: element.isPhoto,
@@ -100,35 +103,10 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
                   isSlideshow: element.isSlideshows,
                   contentUrl: element.contentUrl,
                   index: element.id - 1,
-                  width: element.width,
-                  height: element.height,
+                  width: width,
+                  height: height,
                 ),
               );
-              // if (element.id > 1) {
-              //   cardList.add(
-              //     DiscoveryCard(
-              //       isPhoto: element.isPhoto,
-              //       isReels: element.isReels,
-              //       isSlideshow: element.isSlideshows,
-              //       contentUrl: element.contentUrl,
-              //       index: element.id - 1,
-              //       width: MediaQuery.of(context).size.width.toInt(),
-              //       height: 120,
-              //     ),
-              //   );
-              // } else {
-              //   cardList.add(
-              //     DiscoveryCard(
-              //       isPhoto: element.isPhoto,
-              //       isReels: element.isReels,
-              //       isSlideshow: element.isSlideshows,
-              //       contentUrl: element.contentUrl,
-              //       index: element.id - 1,
-              //       width: MediaQuery.of(context).size.width.toInt(),
-              //       height: 320,
-              //     ),
-              //   );
-              // }
             }
 
             return StaggeredGrid.count(crossAxisCount: 3, children: cardList);

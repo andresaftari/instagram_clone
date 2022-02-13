@@ -9,7 +9,7 @@ class DiscoveryController extends GetxController {
 
   Future<List<Discovery>> getDiscoveryFeeds() async {
     return _discoveryRepository.getDiscoveryFeeds().then((value) {
-      print('Discovery: Controller Passed');
+      // print('Discovery: Controller Passed');
 
       discoveryObsList.assignAll(value);
       return value;
