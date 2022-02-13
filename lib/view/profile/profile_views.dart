@@ -26,7 +26,8 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildProfileData(),
-          buildProfileBio(),
+          buildDummyProfileBio(),
+          editProfileAction(),
         ],
       ),
     );
@@ -117,7 +118,7 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
     );
   }
 
-  Container buildProfileBio() {
+  Container buildDummyProfileBio() {
     return Container(
       margin: EdgeInsets.only(left: 16, top: 5),
       child: Column(
@@ -141,6 +142,46 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
             maxLines: 4,
             textAlign: TextAlign.start,
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Padding editProfileAction() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Row(
+        children: [
+          ElevatedButton(
+            onPressed: () => SnackbarUtils.showEditProfileInDevelopment(),
+            child: Center(
+              child: Text(
+                'Edit Profile',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(MediaQuery.of(context).size.width - 80, 35),
+              primary: bgDarkMode,
+              side: BorderSide(color: actionFillColor),
+              elevation: 0,
+            ),
+          ),
+          SizedBox(width: 8),
+          ElevatedButton(
+            onPressed: () => SnackbarUtils.showDiscoverPeopleInDevelopment(),
+            child: Icon(
+              Icons.person_add_outlined,
+              color: Colors.white,
+              size: 18,
+            ),
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(35, 35),
+              primary: bgDarkMode,
+              side: BorderSide(color: actionFillColor),
+              elevation: 0,
+            ),
           ),
         ],
       ),

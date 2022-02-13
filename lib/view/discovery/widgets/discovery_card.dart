@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DiscoveryCard extends StatefulWidget {
@@ -34,11 +35,20 @@ class _DiscoveryCardState extends State<DiscoveryCard> {
             width: widget.width.toDouble(),
             height: widget.height.toDouble(),
           ),
-          widget.isPhoto && widget.isSlideshow && !widget.isReels
+          widget.isPhoto && widget.isSlideshow
               ? Padding(
-                padding: const EdgeInsets.all(4),
-                child: Icon(Icons.filter_none, color: Colors.white, size: 20),
-              )
+                  padding: const EdgeInsets.all(4),
+                  child: Icon(Icons.filter_none, color: Colors.white, size: 20),
+                )
+              : Container(),
+          widget.isReels
+              ? Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Icon(
+                    CupertinoIcons.play_rectangle_fill,
+                    color: Colors.white,
+                    size: 20,
+                  ))
               : Container(),
         ],
       ),

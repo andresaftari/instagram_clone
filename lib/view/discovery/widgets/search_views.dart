@@ -28,7 +28,7 @@ class _SearchViewsState extends State<SearchViews> {
           textAlignVertical: TextAlignVertical.bottom,
           decoration: InputDecoration(
             filled: true,
-            fillColor: searchFillColor,
+            fillColor: actionFillColor,
             hintText: 'Search',
             hintStyle: TextStyle(
               color: Color.fromRGBO(157, 157, 157, 1),

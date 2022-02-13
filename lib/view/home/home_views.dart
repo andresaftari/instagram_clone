@@ -53,11 +53,7 @@ class _HomePageViewsState extends State<HomePageViews> {
                     )
                   : RefreshIndicator(
                       onRefresh: _refreshFeed,
-                      child: Column(
-                        children: [
-                          buildHomeBody(),
-                        ],
-                      ),
+                      child: buildHomeBody(),
                     );
             },
           ),

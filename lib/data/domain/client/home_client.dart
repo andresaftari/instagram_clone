@@ -9,7 +9,7 @@ class HomeClient {
     isFeedLiked.value = !isFeedLiked.value;
   }
 
-  Future getUserStories() async {
+  Future<List<UserStory>> getUserStories() async {
     List<UserStory> listStory = [];
 
     try {

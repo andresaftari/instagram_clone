@@ -15,6 +15,6 @@ class Discovery {
 
   @override
   String toString() {
-    return 'Discovery{id: $id, isPhoto: $isPhoto, isReels: $isReels\n}';
+    return 'Discovery{id: $id, isPhoto: $isPhoto, isReels: $isReels}\n';
   }
 }

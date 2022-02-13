@@ -11,6 +11,7 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
   final DiscoveryController _discoveryController = Get.find();
 
   late Future<List<Discovery>> listDiscovery;
+  var discoveryArr = [];
 
   @override
   void initState() {
@@ -72,12 +73,7 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
             },
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            SnackbarUtils.showDiscoveryFeedsInDevelopment();
-          },
-          child: buildDiscoveryGridViews(),
-        ),
+        buildDiscoveryGridViews(),
       ],
     );
   }
@@ -97,18 +93,25 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
               var height = element.isReels ? 240 : 120;
 
               cardList.add(
-                DiscoveryCard(
-                  isPhoto: element.isPhoto,
-                  isReels: element.isReels,
-                  isSlideshow: element.isSlideshows,
-                  contentUrl: element.contentUrl,
-                  index: element.id - 1,
-                  width: width,
-                  height: height,
+                GestureDetector(
+                  onTap: () {
+                    SnackbarUtils.showDiscoveryFeedsInDevelopment();
+                    print('Tapped: ${element.toString()}');
+                  },
+                  child: DiscoveryCard(
+                    isPhoto: element.isPhoto,
+                    isReels: element.isReels,
+                    isSlideshow: element.isSlideshows,
+                    contentUrl: element.contentUrl,
+                    index: element.id - 1,
+                    width: width,
+                    height: height,
+                  ),
                 ),
               );
             }
 
+            discoveryArr.assignAll(cardList);
             return StaggeredGrid.count(crossAxisCount: 3, children: cardList);
           } else {
             return Center(child: Text('No Data...'));
@@ -116,49 +119,49 @@ class _DiscoveryPageViewsState extends State<DiscoveryPageViews> {
         });
   }
 
-  // Widget buildDiscoveryGridTile() {
-  //   return FutureBuilder<List<Discovery>>(
-  //     future: listDiscovery,
-  //     builder: (context, snapshot) {
-  //       if (snapshot.hasData) {
-  //         var discoveryList = snapshot.data!;
-  //
-  //         print(discoveryList.toString());
-  //
-  //         return Container(
-  //           width: MediaQuery.of(context).size.width,
-  //           height: MediaQuery.of(context).size.height,
-  //           child: GridView.custom(
-  //             gridDelegate: SliverQuiltedGridDelegate(
-  //               repeatPattern: QuiltedGridRepeatPattern.inverted,
-  //               crossAxisCount: discoveryList.length - 1,
-  //               pattern: const [
-  //                 QuiltedGridTile(2, 2),
-  //                 QuiltedGridTile(1, 1),
-  //                 QuiltedGridTile(1, 1),
-  //                 QuiltedGridTile(1, 2),
-  //               ],
-  //             ),
-  //             childrenDelegate: SliverChildBuilderDelegate(
-  //               (context, index) {
-  //                 return DiscoveryCard(
-  //                   isPhoto: discoveryList[index].isPhoto,
-  //                   isReels: discoveryList[index].isReels,
-  //                   isSlideshow: discoveryList[index].isSlideshows,
-  //                   contentUrl: discoveryList[index].contentUrl,
-  //                   index: index,
-  //                   width: MediaQuery.of(context).size.width.toInt(),
-  //                   height: 400,
-  //                 );
-  //               },
-  //               childCount: discoveryList.length,
-  //             ),
-  //           ),
-  //         );
-  //       } else {
-  //         return Center(child: Text('No Data...'));
-  //       }
-  //     },
-  //   );
-  // }
+// Widget buildDiscoveryGridTile() {
+//   return FutureBuilder<List<Discovery>>(
+//     future: listDiscovery,
+//     builder: (context, snapshot) {
+//       if (snapshot.hasData) {
+//         var discoveryList = snapshot.data!;
+//
+//         print(discoveryList.toString());
+//
+//         return Container(
+//           width: MediaQuery.of(context).size.width,
+//           height: MediaQuery.of(context).size.height,
+//           child: GridView.custom(
+//             gridDelegate: SliverQuiltedGridDelegate(
+//               repeatPattern: QuiltedGridRepeatPattern.inverted,
+//               crossAxisCount: discoveryList.length - 1,
+//               pattern: const [
+//                 QuiltedGridTile(2, 2),
+//                 QuiltedGridTile(1, 1),
+//                 QuiltedGridTile(1, 1),
+//                 QuiltedGridTile(1, 2),
+//               ],
+//             ),
+//             childrenDelegate: SliverChildBuilderDelegate(
+//               (context, index) {
+//                 return DiscoveryCard(
+//                   isPhoto: discoveryList[index].isPhoto,
+//                   isReels: discoveryList[index].isReels,
+//                   isSlideshow: discoveryList[index].isSlideshows,
+//                   contentUrl: discoveryList[index].contentUrl,
+//                   index: index,
+//                   width: MediaQuery.of(context).size.width.toInt(),
+//                   height: 400,
+//                 );
+//               },
+//               childCount: discoveryList.length,
+//             ),
+//           ),
+//         );
+//       } else {
+//         return Center(child: Text('No Data...'));
+//       }
+//     },
+//   );
+// }
 }

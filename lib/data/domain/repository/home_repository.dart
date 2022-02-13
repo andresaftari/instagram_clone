@@ -7,7 +7,7 @@ class HomeRepository {
   final HomeClient _homeClient = HomeClient();
   var isFeedLiked = false.obs;
 
-  Future getUserStories() async {
+  Future<List<UserStory>> getUserStories() async {
     return _homeClient.getUserStories();
   }
 

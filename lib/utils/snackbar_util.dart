@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SnackbarUtils {
+  static void showEditProfileInDevelopment() => Get.snackbar(
+    'Edit Profile',
+    'Masih dalam pengembangan',
+    duration: Duration(seconds: 2),
+    colorText: Colors.white,
+  );
+
+  static void showDiscoverPeopleInDevelopment() => Get.snackbar(
+    'Discovery People',
+    'Masih dalam pengembangan',
+    duration: Duration(seconds: 2),
+    colorText: Colors.white,
+  );
+
   static void showStoryInDevelopment() => Get.snackbar(
         'Story',
         'Masih dalam pengembangan',
