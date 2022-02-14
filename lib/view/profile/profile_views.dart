@@ -16,6 +16,16 @@ class ProfilePageViews extends StatefulWidget {
 }
 
 class _ProfilePageViewsState extends State<ProfilePageViews> {
+  final ProfileController _profileController = Get.find();
+
+  late Future listHighlight;
+
+  @override
+  void initState() {
+    listHighlight = _profileController.getHighlight();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +38,7 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
           buildProfileData(),
           buildDummyProfileBio(),
           editProfileAction(),
+          buildProfileHighlight(),
         ],
       ),
     );
@@ -184,6 +195,60 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Container buildProfileHighlight() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 120,
+      child: FutureBuilder<dynamic>(
+        future: listHighlight,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var highlightList = snapshot.data!;
+
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: highlightList.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, i) {
+                if (i < highlightList.length - 1) {
+                  return ProfileHighlightCard(
+                    title: highlightList[i].title,
+                    thumbnail: highlightList[i].thumbnail,
+                  );
+                } else {
+                  return Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 16),
+                        width: 56,
+                        height: 56,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: actionFillColor),
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/icon_add.png'),
+                            colorFilter: ColorFilter.mode(
+                              Colors.black,
+                              BlendMode.luminosity,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text('New', style: TextStyle(fontSize: 14)),
+                    ],
+                  );
+                }
+              },
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }

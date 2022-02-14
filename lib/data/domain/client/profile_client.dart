@@ -14,6 +14,7 @@ class ProfileClient {
         isIGTV: false,
         isSlideshows: false,
       );
+
       var _dummy2 = ProfileFeeds(
         id: 2,
         imageURL: '',
@@ -23,6 +24,7 @@ class ProfileClient {
         isIGTV: false,
         isSlideshows: false,
       );
+
       var _dummy3 = ProfileFeeds(
         id: 3,
         imageURL: '',
@@ -32,6 +34,7 @@ class ProfileClient {
         isIGTV: true,
         isSlideshows: false,
       );
+
       var _dummy4 = ProfileFeeds(
         id: 4,
         imageURL: '',
@@ -59,23 +62,46 @@ class ProfileClient {
     try {
       var _dummy1 = ProfileHighlights(
         id: 1,
-        thumbnail: '',
+        thumbnail: 'assets/images/chevalier.png',
         title: 'Welcome',
       );
+
       var _dummy2 = ProfileHighlights(
         id: 2,
-        thumbnail: '',
+        thumbnail: 'assets/images/andre.png',
         title: 'To',
       );
+
       var _dummy3 = ProfileHighlights(
         id: 3,
-        thumbnail: '',
+        thumbnail: 'assets/images/prism-a.png',
         title: 'Andzzz\'s',
+      );
+
+      var _dummy4 = ProfileHighlights(
+        id: 4,
+        thumbnail: 'assets/images/chevalier.png',
+        title: 'He',
+      );
+
+      var _dummy5 = ProfileHighlights(
+        id: 5,
+        thumbnail: 'assets/images/chevalier.png',
+        title: 'He',
+      );
+
+      var _dummy6 = ProfileHighlights(
+        id: 6,
+        thumbnail: 'assets/images/chevalier.png',
+        title: 'He',
       );
 
       listProfileHighlights.add(_dummy1);
       listProfileHighlights.add(_dummy2);
       listProfileHighlights.add(_dummy3);
+      listProfileHighlights.add(_dummy4);
+      listProfileHighlights.add(_dummy5);
+      listProfileHighlights.add(_dummy6);
     } catch (e) {
       print(e.toString());
     }
