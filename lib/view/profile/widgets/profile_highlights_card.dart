@@ -18,7 +18,7 @@ class _ProfileHighlightCardState extends State<ProfileHighlightCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(16),
+      margin: EdgeInsets.only(right: 16, top: 16),
       child: Column(
         children: [
           Container(
@@ -34,7 +34,13 @@ class _ProfileHighlightCardState extends State<ProfileHighlightCard> {
             ),
           ),
           SizedBox(height: 8),
-          Text('${widget.title}', style: TextStyle(fontSize: 14)),
+          Text(
+            '${widget.title}',
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );

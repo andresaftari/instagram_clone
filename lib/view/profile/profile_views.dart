@@ -82,12 +82,16 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
               '3',
               style: TextStyle(
                 fontSize: 20,
+                color: Colors.white,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Text(
               'Posts',
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -100,11 +104,15 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
             ),
             Text(
               'Followers',
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -117,11 +125,15 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
             ),
             Text(
               'Following',
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -131,28 +143,39 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
 
   Container buildDummyProfileBio() {
     return Container(
-      margin: EdgeInsets.only(left: 16, top: 5),
+      margin: EdgeInsets.only(left: 16, top: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '${widget.fullname}',
             textAlign: TextAlign.start,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+              color: Colors.white,
+            ),
           ),
           SizedBox(height: 4),
           Text(
             'This is dummy bio of Andre Saftari, this app creator :)',
             maxLines: 4,
             textAlign: TextAlign.start,
-            style: TextStyle(fontSize: 14),
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+            ),
           ),
           SizedBox(height: 4),
           Text(
             'https://example.com/',
             maxLines: 4,
             textAlign: TextAlign.start,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
@@ -161,7 +184,7 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
 
   Padding editProfileAction() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Row(
         children: [
           ElevatedButton(
@@ -202,53 +225,71 @@ class _ProfilePageViewsState extends State<ProfilePageViews> {
   Container buildProfileHighlight() {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 120,
-      child: FutureBuilder<dynamic>(
-        future: listHighlight,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            var highlightList = snapshot.data!;
+      height: 110,
+      child: Row(
+        children: [
+          FutureBuilder<dynamic>(
+            future: listHighlight,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                var highlightList = snapshot.data!;
 
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: highlightList.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, i) {
-                if (i < highlightList.length - 1) {
-                  return ProfileHighlightCard(
-                    title: highlightList[i].title,
-                    thumbnail: highlightList[i].thumbnail,
-                  );
-                } else {
-                  return Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(top: 16),
-                        width: 56,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: actionFillColor),
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/icon_add.png'),
-                            colorFilter: ColorFilter.mode(
-                              Colors.black,
-                              BlendMode.luminosity,
-                            ),
-                          ),
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: highlightList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, i) {
+                    if (i == 0) {
+                      return Container(
+                        margin: EdgeInsets.only(left: 16),
+                        child: ProfileHighlightCard(
+                          title: highlightList[i].title,
+                          thumbnail: highlightList[i].thumbnail,
                         ),
-                      ),
-                      SizedBox(height: 8),
-                      Text('New', style: TextStyle(fontSize: 14)),
-                    ],
-                  );
-                }
-              },
-            );
-          } else {
-            return Container();
-          }
-        },
+                      );
+                    } else {
+                      return ProfileHighlightCard(
+                        title: highlightList[i].title,
+                        thumbnail: highlightList[i].thumbnail,
+                      );
+                    }
+                  },
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
+          Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 16, top: 16),
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: actionFillColor),
+                ),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 32,
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                margin: EdgeInsets.only(right: 16),
+                child: Text(
+                  'New',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

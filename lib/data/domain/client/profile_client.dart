@@ -78,30 +78,9 @@ class ProfileClient {
         title: 'Andzzz\'s',
       );
 
-      var _dummy4 = ProfileHighlights(
-        id: 4,
-        thumbnail: 'assets/images/chevalier.png',
-        title: 'He',
-      );
-
-      var _dummy5 = ProfileHighlights(
-        id: 5,
-        thumbnail: 'assets/images/chevalier.png',
-        title: 'He',
-      );
-
-      var _dummy6 = ProfileHighlights(
-        id: 6,
-        thumbnail: 'assets/images/chevalier.png',
-        title: 'He',
-      );
-
       listProfileHighlights.add(_dummy1);
       listProfileHighlights.add(_dummy2);
       listProfileHighlights.add(_dummy3);
-      listProfileHighlights.add(_dummy4);
-      listProfileHighlights.add(_dummy5);
-      listProfileHighlights.add(_dummy6);
     } catch (e) {
       print(e.toString());
     }

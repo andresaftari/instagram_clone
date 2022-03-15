@@ -66,7 +66,7 @@ class _HomePageViewsState extends State<HomePageViews> {
     return Container(
       padding: EdgeInsets.only(top: 4),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height - 160,
+      height: MediaQuery.of(context).size.height - 200,
       child: FutureBuilder<List<Feeds>>(
         future: listFeeds,
         builder: (context, snapshot) {
