@@ -4,6 +4,7 @@
 
 
 By the way... It's still work in progress, so please stand by :)
+</br>
 This project will be updated at least two commits for every week, so... stay tune!
 
 <h3>Developed With</h3>
